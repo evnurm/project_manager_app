@@ -1,7 +1,7 @@
 package model;
 
 /**
- * @author evnurm.
+ * @author evnurm
  */
 public class Project {
 }
