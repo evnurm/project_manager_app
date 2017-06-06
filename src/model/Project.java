@@ -21,7 +21,7 @@ public class Project{
 
     /** Adds a task into this project. */
     public void addTask(Task task){
-        tasks.add(task)
+        tasks.add(task);
     }
 
     /** Removes the given task from this project. */
@@ -30,14 +30,14 @@ public class Project{
     }
 
     /** Adds the given member into this project. */
-    public void addMember(Member member){ members.add(member) }
+    public void addMember(Member member){ members.add(member); }
 
     /** Removes the given member from this project. */
-    public void removeMember(Member member){ members.remove(member)}
+    public void removeMember(Member member){ members.remove(member);}
 
     /** Sets the deadline of the project to the given date. */
-    public void setDL(Date date){ deadline = date }
+    public void setDL(Date date){ deadline = date; }
 
     /** Sets the beginning date of the project to the given date. */
-    public void setBeginning(Date date){beginning = date}
+    public void setBeginning(Date date){beginning = date;}
 }
