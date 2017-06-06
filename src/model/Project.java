@@ -9,14 +9,17 @@ import java.util.Date;
 public class Project{
 
     private String title;
+    private String description;
     private Date deadline;
     private Date beginning;
     private ArrayList<Member> members = new ArrayList<Member>();
     private ArrayList<Task> tasks = new ArrayList<Task>();
 
 
-    public Project(String name){
+    public Project(String name, Date beginning, Date DL){
         title = name;
+        this.beginning = beginning;
+        deadline = DL;
     }
 
     /** Adds a task into this project. */
@@ -25,7 +28,7 @@ public class Project{
     }
 
     /** Removes the given task from this project. */
-    public removeTask(Task task){
+    public void removeTask(Task task){
         tasks.remove(task);
     }
 
