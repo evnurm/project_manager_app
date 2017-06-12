@@ -5,7 +5,7 @@ package model;
  */
 public class Task {
 
-    String title;
+    public String title;
 
     public Task(String name){
         title = name;
