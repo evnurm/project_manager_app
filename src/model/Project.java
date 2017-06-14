@@ -13,7 +13,7 @@ public class Project{
     private Date deadline;
     private Date beginning;
     private ArrayList<Member> members = new ArrayList<Member>();
-    private ArrayList<Task> tasks = new ArrayList<Task>();
+    public ArrayList<Task> tasks = new ArrayList<Task>();
 
 
     public Project(String name, Date beginning, Date DL){
