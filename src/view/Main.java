@@ -1,4 +1,5 @@
-package view;/**
+package view;
+/**
  * Created by Alvar on 9.6.2017.
  */
 
