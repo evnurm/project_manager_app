@@ -12,7 +12,7 @@
          <children>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label text="Test task" />
+                  <Label text="Test project" />
                   <Button mnemonicParsing="false" onAction="#viewButtonClicked" text="View" />
                </children>
             </HBox>
