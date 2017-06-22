@@ -44,7 +44,7 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding>
       </PasswordField>
-      <Button contentDisplay="CENTER" graphicTextGap="6.0" mnemonicParsing="false" onAction="#signIn" style="-fx-max-width: 100; -fx-background-color: linear-gradient(#444444, #333333);" text="Log in" textFill="#f0eded72">
+      <Button fx:id="loginButton" contentDisplay="CENTER" graphicTextGap="6.0" mnemonicParsing="false" onMouseClicked="#signIn" onMouseEntered="#onHover" onMouseExited="#onHoverOut" style="-fx-max-width: 100; -fx-background-color: linear-gradient(#444444, #333333);" text="Log in" textFill="#f0eded72">
          <VBox.margin>
             <Insets top="20.0" />
          </VBox.margin>
