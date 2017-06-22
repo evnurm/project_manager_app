@@ -1,2 +1,9 @@
-INSERT INTO Users
-VALUES(0, "Admin", "e7cf3ef4f17c3999a94f2c6f612e8a888e5b1026878e4e19398b23bd38ec221a", "Viljami", "Nurminen", "axel.viljami.nurminen@hotmail.com" )
+CREATE TABLE USERS(
+    user_id INT PRIMARY KEY,
+    username VARCHAR(20),
+    password CHAR(64),
+    first_name VARCHAR(20),
+    last_name VARCHAR(30),
+    email VARCHAR(50)
+
+);
