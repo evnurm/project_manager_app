@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import model.ListableItem;
 import model.Project;
 import model.Task;
 
@@ -48,8 +49,11 @@ public class TasksViewController implements Initializable{
     public void setProjectData(Project project) {
         this.taskContainer.getChildren().clear();
         this.project = project;
-        for (Task task : this.project.tasks) {
-            taskContainer.getChildren().add(new Label(task.title));
+        for (ListableItem task : this.project.tasks) {
+            //taskContainer.getChildren().add(new Label(task.getTitle()));
+            ListItemController listItem = new ListItemController();
+            listItem.setText(task.getTitle());
+            taskContainer.getChildren().add(listItem);
         }
     }
 }
