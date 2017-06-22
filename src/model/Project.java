@@ -6,7 +6,7 @@ import java.util.Date;
 /**
  * @author evnurm
  */
-public class Project{
+public class Project implements ListableItem{
 
     private String title;
     private String description;
@@ -43,4 +43,14 @@ public class Project{
 
     /** Sets the beginning date of the project to the given date. */
     public void setBeginning(Date date){beginning = date;}
+
+    @Override
+    public String getTitle() {
+        return this.title;
+    }
+
+    @Override
+    public String getDescription() {
+        return this.description;
+    }
 }
