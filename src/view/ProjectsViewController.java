@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import model.ListableItem;
 import model.Project;
 import model.Task;
 
@@ -50,5 +51,15 @@ public class ProjectsViewController implements Initializable {
             testProject.addTask(task);
         }
         this.projects.add(testProject);
+
+        for (ListableItem project : this.projects) {
+            ListItem listItem = new ListItem(project) {
+                @Override
+                protected void buttonClicked() throws IOException {
+                    viewButtonClicked();
+                }
+            };
+            this.projectsContainer.getChildren().add(listItem);
+        }
     }
 }

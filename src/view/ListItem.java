@@ -3,8 +3,10 @@ package view;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
+import model.ListableItem;
 
 import java.io.IOException;
 
@@ -16,11 +18,12 @@ import java.io.IOException;
  * The code is modified from the official documentation at:
  * http://docs.oracle.com/javafx/2/fxml_get_started/custom_control.htm
  */
-public class ListItemController extends HBox {
+public class ListItem extends HBox {
+    public ListableItem item;
     @FXML
-    private TextField textField;
+    private Label title;
 
-    public ListItemController() {
+    public ListItem(ListableItem item) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(
                 "listItem.fxml"));
         fxmlLoader.setRoot(this);
@@ -31,22 +34,16 @@ public class ListItemController extends HBox {
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
+        this.item = item;
+        this.title.setText(item.getTitle());
     }
-
-    public String getText() {
-        return textProperty().get();
-    }
-
+/*
     public void setText(String value) {
-        textProperty().set(value);
+        this.title.setText(value);
     }
-
-    public StringProperty textProperty() {
-        return textField.textProperty();
-    }
-
+*/
     @FXML
-    protected void doSomething() {
-        System.out.println("The button was clicked!");
+    protected void buttonClicked() throws IOException {
+        System.out.println("Going to corresponding view");
     }
 }
