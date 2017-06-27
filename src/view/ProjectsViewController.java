@@ -25,18 +25,17 @@ import java.util.ResourceBundle;
  */
 public class ProjectsViewController implements Initializable {
 
-    private TasksViewController tasksViewController;
     @FXML public VBox projectsContainer;
-    public ArrayList<Project> projects = new ArrayList<Project>();
+    private ArrayList<Project> projects = new ArrayList<Project>();
 
-    public void viewButtonClicked() throws IOException {
+    private void loadTasksView(Project project) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("tasksView.fxml"));
         Parent root = loader.load(); //this triggers taskViewController's init-method
-        this.tasksViewController = loader.getController();
-        this.tasksViewController.setProjectsViewController(this);
-        this.tasksViewController.setProjectData(this.projects.get(0)); //The project data would be retrieved from
-                                                                       //the UI-project-element that was clicked
+
+        TasksViewController tasksViewController = loader.getController();
+        tasksViewController.setProjectData(project);
+
         Scene tasksViewScene = new Scene(root);
         Stage stage = (Stage)projectsContainer.getScene().getWindow();
         stage.setScene(tasksViewScene);
@@ -56,7 +55,7 @@ public class ProjectsViewController implements Initializable {
             ListItem listItem = new ListItem(project) {
                 @Override
                 protected void buttonClicked() throws IOException {
-                    viewButtonClicked();
+                    loadTasksView((Project)this.item);
                 }
             };
             this.projectsContainer.getChildren().add(listItem);

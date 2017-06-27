@@ -14,7 +14,6 @@ import model.Task;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
@@ -22,9 +21,8 @@ import java.util.ResourceBundle;
  */
 public class TasksViewController implements Initializable{
 
-    private ProjectsViewController projectsViewController;
+    //private ProjectsViewController projectsViewController;
     private Project project;
-    private ArrayList<Task> testTasks = new ArrayList<Task>();
 
     @FXML public Button backButton;
     @FXML public VBox taskContainer;
@@ -38,18 +36,22 @@ public class TasksViewController implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //taskContainer.getChildren().clear();
     }
 
-    public void setProjectsViewController(ProjectsViewController c) {
-        this.projectsViewController = c;
-    }
+    //public void setProjectsViewController(ProjectsViewController c) {
+    //    this.projectsViewController = c;
+    //}
 
     public void setProjectData(Project project) {
         this.taskContainer.getChildren().clear();
         this.project = project;
         for (ListableItem task : this.project.tasks) {
-            ListItem listItem = new ListItem(task);
+            ListItem listItem = new ListItem(task) {
+                @Override
+                protected void buttonClicked() throws IOException {
+                    super.buttonClicked(); //TODO: give custom behaviour
+                }
+            };
             this.taskContainer.getChildren().add(listItem);
         }
     }
