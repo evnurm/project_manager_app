@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.ListableItem;
@@ -26,6 +27,8 @@ public class TasksViewController implements Initializable{
 
     @FXML public Button backButton;
     @FXML public VBox taskContainer;
+    @FXML public Label titleLabel;
+    @FXML public Label descriptionLabel;
 
     public void backButtonClicked() throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("projectsView.fxml"));
@@ -45,6 +48,8 @@ public class TasksViewController implements Initializable{
     public void setProjectData(Project project) {
         this.taskContainer.getChildren().clear();
         this.project = project;
+        this.titleLabel.setText(project.getTitle());
+        //this.descriptionLabel.setText(project.getDescription());
         for (ListableItem task : this.project.tasks) {
             ListItem listItem = new ListItem(task) {
                 @Override
