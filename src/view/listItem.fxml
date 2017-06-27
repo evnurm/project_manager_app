@@ -8,5 +8,6 @@
 
 <fx:root type="javafx.scene.layout.HBox" xmlns:fx="http://javafx.com/fxml">
     <Label fx:id="title"/>
-    <Button text="View" onAction="#buttonClicked"/>
+    <AnchorPane prefWidth="300"></AnchorPane>
+    <Button text="View" layoutX="300" onAction="#buttonClicked"/>
 </fx:root>
