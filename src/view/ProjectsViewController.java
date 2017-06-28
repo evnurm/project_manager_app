@@ -26,7 +26,8 @@ import java.util.ResourceBundle;
 public class ProjectsViewController implements Initializable {
 
     @FXML public VBox projectsContainer;
-    private ArrayList<Project> projects = new ArrayList<Project>();
+    private static ArrayList<Project> projects = new ArrayList<Project>();
+    private static boolean isStartup = true;
 
     private void loadTasksView(Project project) throws IOException {
         FXMLLoader loader = new FXMLLoader();
@@ -43,19 +44,28 @@ public class ProjectsViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //set testing data
-        Project testProject = new Project("Testing project", new java.util.Date(), new java.util.Date());
-        Task[] testTaskData = {new Task("tehtava1"), new Task("tehtava2"), new Task("tehtava3")};
-        for (Task task : testTaskData) {
-            testProject.addTask(task);
-        }
-        this.projects.add(testProject);
+        if (isStartup) {
+            //set testing data
+            Project testProject = new Project("Testing project", new java.util.Date(), new java.util.Date());
+            Task[] testTaskData = {new Task("tehtava1"), new Task("tehtava2"), new Task("tehtava3")};
+            for (Task task : testTaskData) {
+                testProject.addTask(task);
+            }
+            projects.add(testProject);
 
-        for (ListableItem project : this.projects) {
+            isStartup = false;
+        }
+
+        for (ListableItem project : projects) {
             ListItem listItem = new ListItem(project) {
                 @Override
-                protected void buttonClicked() throws IOException {
-                    loadTasksView((Project)this.item);
+                protected void viewButtonClicked() throws IOException {
+                    loadTasksView((Project)this.item); //in this context we know that the item is a project
+                }
+
+                @Override
+                protected void deleteButtonClicked() {
+                    System.out.println("overriding");
                 }
             };
             this.projectsContainer.getChildren().add(listItem);

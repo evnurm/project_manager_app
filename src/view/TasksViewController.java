@@ -53,10 +53,18 @@ public class TasksViewController implements Initializable{
         for (ListableItem task : this.project.tasks) {
             ListItem listItem = new ListItem(task) {
                 @Override
-                protected void buttonClicked() throws IOException {
-                    super.buttonClicked(); //TODO: give custom behaviour
+                protected void viewButtonClicked() throws IOException {
+                    //TODO: create task view, which this would load
+                }
+
+                @Override
+                protected void deleteButtonClicked() {
+                    project.removeTask((Task)this.item);
+                    taskContainer.getChildren().remove(this);
+                    //TODO: should this interact with the database?
                 }
             };
+
             this.taskContainer.getChildren().add(listItem);
         }
     }

@@ -18,7 +18,7 @@ import java.io.IOException;
  * The code is modified from the official documentation at:
  * http://docs.oracle.com/javafx/2/fxml_get_started/custom_control.htm
  */
-public class ListItem extends HBox {
+public abstract class ListItem extends HBox {
     public ListableItem item;
     @FXML
     private Label title;
@@ -43,7 +43,8 @@ public class ListItem extends HBox {
     }
 */
     @FXML
-    protected void buttonClicked() throws IOException {
-        System.out.println("Going to corresponding view");
-    }
+    abstract protected void viewButtonClicked() throws IOException;
+
+    @FXML
+    abstract protected void deleteButtonClicked();
 }

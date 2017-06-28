@@ -9,7 +9,8 @@
 <fx:root type="javafx.scene.layout.HBox" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.112">
     <Label fx:id="title" />
     <AnchorPane prefWidth="300" />
-    <Button layoutX="300" onAction="#buttonClicked" text="View" />
+    <Button layoutX="300" onAction="#deleteButtonClicked" text="Delete" />
+    <Button onAction="#viewButtonClicked" text="View" />
    <padding>
       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
    </padding>
