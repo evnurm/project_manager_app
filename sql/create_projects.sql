@@ -1,7 +1,7 @@
 CREATE TABLE Projects(
 
-	project_id INT,
-	owner_id INT,
+	project_id CHAR(8),
+	owner_id CHAR(6),
     name VARCHAR(30),
     description VARCHAR(150),
     created TIMESTAMP,
