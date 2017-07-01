@@ -8,8 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: linear-gradient(#444444, #555555);" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: linear-gradient(#444444, #555555);" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.RegistrationViewController">
    <children>
       <Label text="Project Manager" textFill="#d7c8c8">
          <font>
@@ -43,8 +42,8 @@
             <Label text="Retype password" textFill="#c6b9b9" GridPane.rowIndex="2" />
             <Label text="First name" textFill="#c6b9b9" GridPane.rowIndex="3" />
             <TextField fx:id="username" promptText="Username" GridPane.columnIndex="1" />
-            <TextField fx:id="password1" promptText="Password" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="password2" promptText="Retype password" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <PasswordField fx:id="password1" promptText="Password" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <PasswordField fx:id="password2" promptText="Retype password" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <TextField fx:id="firstName" promptText="First name" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <Label text="Last name" textFill="#c6b9b9" GridPane.rowIndex="4" />
             <Label text="Email" textFill="#c6b9b9" GridPane.rowIndex="5" />
