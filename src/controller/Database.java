@@ -1,11 +1,14 @@
 package controller;
 import javax.xml.bind.DatatypeConverter;
-import javax.xml.transform.Result;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
-import java.util.Base64;
+
+
+
+
+
 
 /**
  * Created by Viljami on 19.6.2017.
@@ -16,7 +19,7 @@ public class Database {
     Statement statement;
     public Database(){
 
-         final String databaseURL = "jdbc:mysql://localhost/project_manager";
+         final String databaseURL = "jdbc:mysql://localhost/project_manager?useSSL=false";
 
         //  Database credentials
          final String mysqlUsername = "client";
@@ -54,7 +57,7 @@ public class Database {
             ResultSet rs = statement.executeQuery(sql);
 
             while(rs.next()){
-                int id = rs.getInt("user_id");
+                String id = rs.getString("user_id");
                 System.out.println(id);
             }
 
@@ -66,5 +69,39 @@ public class Database {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public boolean idIsTaken(String id) throws SQLException {
+
+            statement = conn.createStatement();
+            ResultSet rs =statement.executeQuery("SELECT COUNT('user_id') AS 'num'  FROM Users WHERE user_id = '" + id + "'");
+            int num = 0;
+                    while(rs.next()){
+                        num = rs.getInt("num");
+                    }
+                    return num != 0;
+
+
+
+
+
+    }
+
+    public void insertUser(String userId, String username,  String password, String fname, String lname, String email) throws SQLException {
+
+        // Hashing the password first.
+        try {
+
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] hash = md.digest(password.getBytes());
+            String hashString = DatatypeConverter.printHexBinary(hash).toLowerCase();
+
+            // Now trying to insert the values into database.
+            statement = conn.createStatement();
+            statement.execute("INSERT INTO Users VALUES('" + userId +"', '" +username +"', '" + hashString +"', '" + fname +"', '" +lname +"', '" + email+"')");
+        }catch(NoSuchAlgorithmException e){
+            System.out.println("No Such Algorithm...");
+        }
+
     }
 }
