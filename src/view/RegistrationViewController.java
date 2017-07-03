@@ -91,21 +91,31 @@ import java.util.ResourceBundle;
                     Matcher matcher = emailPattern.matcher(email.getText());
                     if (matcher.matches()) {
 
+
+
                         // Create an id for the database and see if it is available. If not, try again as long as it is.
                         String id = createID(6);
                         try {
-                            while (db.idIsTaken(id)) {
-                                id = createID(6);
+                            // Check that the given username doesn't yet exist as that would possibly cause a username-password collision.
+                            if(!db.usernameIsTaken(user)) {
+                                while (db.idIsTaken(id)) {
+                                    id = createID(6);
 
+                                }
+                                db.insertUser(id, user, pword1, fname, lname, emailAddress);
+                                feedbackLabel.setTextFill(Color.GREEN);
+                                feedbackLabel.setText("Congratulations! You are now registered.");
+
+                            }else{
+                                feedbackLabel.setText("Oops! the username you chose is already taken.");
                             }
-                            db.insertUser(id, user, pword1, fname,lname,emailAddress);
+
 
                         }catch(SQLException e){
                             feedbackLabel.setText("Oops! Something went wrong.");
                         }
 
-                        feedbackLabel.setTextFill(Color.GREEN);
-                        feedbackLabel.setText("Congratulations! You are now registered.");
+
 
                     }else{
                         feedbackLabel.setText("Please give a proper email address.");

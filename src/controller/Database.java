@@ -87,6 +87,16 @@ public class Database {
 
     }
 
+    public boolean usernameIsTaken(String username) throws SQLException {
+        statement = conn.createStatement();
+        ResultSet rs =statement.executeQuery("SELECT COUNT('user_id') AS 'num'  FROM Users WHERE username = '" + username+ "'");
+        int num = 0;
+        while(rs.next()){
+            num = rs.getInt("num");
+        }
+        return num != 0;
+    }
+
     public void insertUser(String userId, String username,  String password, String fname, String lname, String email) throws SQLException {
 
         // Hashing the password first.
