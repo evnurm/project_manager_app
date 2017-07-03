@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: linear-gradient(#444444, #555555);" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.RegistrationViewController">
+<VBox fx:id="layout" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: linear-gradient(#444444, #555555);" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.RegistrationViewController">
    <children>
       <Label text="Project Manager" textFill="#d7c8c8">
          <font>
@@ -51,10 +51,28 @@
             <TextField fx:id="email" promptText="Email" GridPane.columnIndex="1" GridPane.rowIndex="5" />
          </children>
       </GridPane>
-      <Button fx:id="signUpButton" mnemonicParsing="false" style="-fx-background-color: linear-gradient(#555555, #666666);" text="Create an account">
+      <Label fx:id="feedbackLabel">
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
          <VBox.margin>
-            <Insets top="35.0" />
+            <Insets top="10.0" />
+         </VBox.margin>
+      </Label>
+      <Button fx:id="signUpButton" mnemonicParsing="false" onMouseClicked="#register" onMouseEntered="#onHover" onMouseExited="#onHoverOut" style="-fx-background-color: linear-gradient(#333333, #444444);" text="Create an account" textFill="#d3c4c4">
+         <VBox.margin>
+            <Insets top="20.0" />
          </VBox.margin>
       </Button>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Label text="Already have an account? " textFill="#d3cccc" />
+            <Label fx:id="loginLabel" onMouseClicked="#changeLoginView" text="Log in" textFill="#bc3434">
+               <HBox.margin>
+                  <Insets left="7.0" />
+               </HBox.margin>
+            </Label>
+         </children>
+      </HBox>
    </children>
 </VBox>

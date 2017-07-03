@@ -9,7 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" style="-fx-alignment: top_center; -fx-background-color: linear-gradient(#555555, #444444);" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.LoginViewController">
+<VBox fx:id="layout" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" style="-fx-alignment: top_center; -fx-background-color: linear-gradient(#555555, #444444);" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.LoginViewController">
    <children>
       <Label alignment="TOP_CENTER" style="-fx-opacity: 1; -fx-text-fill: #BBBBBB;" text="Project Manager" textFill="#ffffff21">
          <font>
@@ -59,7 +59,7 @@
                   <Insets left="15.0" top="50.0" />
                </HBox.margin>
             </Label>
-            <Label style="-fx-font-style: italic;" text="Sign up" textFill="#bc0001">
+            <Label fx:id="signUpLabel" onMouseClicked="#changeRegistrationView" style="-fx-font-style: italic;" text="Sign up" textFill="#bc0001">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
