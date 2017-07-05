@@ -150,7 +150,7 @@ public class Database {
 
 
 
-           projects.add(new Project(projectId, ownerId, name, desc, created, deadline);
+           projects.add(new Project(projectId, ownerId, name, desc, created, deadline));
 
 
         }
