@@ -94,12 +94,12 @@ import java.util.ResourceBundle;
 
 
                         // Create an id for the database and see if it is available. If not, try again as long as it is.
-                        String id = createID(6);
+                        String id = db.createID(6);
                         try {
                             // Check that the given username doesn't yet exist as that would possibly cause a username-password collision.
                             if(!db.usernameIsTaken(user)) {
                                 while (db.idIsTaken(id)) {
-                                    id = createID(6);
+                                    id = db.createID(6);
 
                                 }
                                 db.insertUser(id, user, pword1, fname, lname, emailAddress);
@@ -131,20 +131,8 @@ import java.util.ResourceBundle;
 
             }
     }
-    public String createID(int length){
 
-        Random rand = new Random();
-        char[] base64 = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'A', 'B', 'C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
-                'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z', '-', '/',};
-       char[] id = new char[length];
-
-        for(int i = 1; i<= length ; i++){
-            id[i -1] = base64[rand.nextInt(64)];
-
-        }
-
-        return new String(id);
 
     }
 
-}
+

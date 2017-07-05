@@ -6,6 +6,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.ListableItem;
@@ -34,6 +36,10 @@ public class ProjectsViewController implements Initializable {
 
     private Database db = Main.getDatabase();
     private String userid = Main.userid;
+
+    @FXML public BorderPane layout;
+    @FXML public Button newProjectButton;
+    @FXML public Button signOutButton;
 
     private void loadTasksView(Project project) throws IOException {
         FXMLLoader loader = new FXMLLoader();
@@ -73,4 +79,40 @@ public class ProjectsViewController implements Initializable {
             this.projectsContainer.getChildren().add(listItem);
         }
     }
+
+    public void onAddButtonHover(){
+        newProjectButton.setStyle("-fx-background-color: linear-gradient(#555555, #444444)");
+
+    }
+    public void onAddButtonHoverOut(){
+        newProjectButton.setStyle("-fx-background-color: linear-gradient(#444444, #333333)");
+    }
+
+    public void onSignOutButtonHover(){
+        signOutButton.setStyle("-fx-background-color: linear-gradient(#555555, #444444)");
+
+    }
+    public void onSignOutButtonHoverOut(){
+        signOutButton.setStyle("-fx-background-color: linear-gradient(#444444, #333333)");
+    }
+
+    public void signOut(){
+        try {
+            // Empty the user id in main and return to login view
+            Main.userid = "";
+
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("LoginView.fxml"));
+            Parent root = loader.load();
+
+
+            Scene login = new Scene(root);
+            Stage stage = (Stage) layout.getScene().getWindow();
+            stage.setScene(login);
+        }catch(IOException e){
+
+        }
+    }
 }
+
+

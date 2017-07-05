@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Random;
 
 
 /**
@@ -20,6 +21,8 @@ public class Database {
 
     Connection conn;
     Statement statement;
+
+
     public Database(){
 
          final String databaseURL = "jdbc:mysql://localhost/project_manager?useSSL=false";
@@ -46,6 +49,21 @@ public class Database {
              System.out.println("SQL Exception");
          }
 
+    }
+
+    public String createID(int length) {
+
+        Random rand = new Random();
+        char[] base64 = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+                'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '-', '/',};
+        char[] id = new char[length];
+
+        for (int i = 1; i <= length; i++) {
+            id[i - 1] = base64[rand.nextInt(64)];
+
+        }
+
+        return new String(id);
     }
 
     public String signIn(String username, String passwordText){
@@ -163,4 +181,24 @@ public class Database {
 
 
     }
+
+    /**
+     * Creates a new database entry for a new project.
+     * @param project
+     * @return
+     */
+    public boolean addProject(Project project) throws SQLException {
+
+        statement = conn.createStatement();
+        String projectId = project.getId();
+        String ownerID = project.getId();
+        String name = project.getTitle();
+        String desc = project.getDescription();
+
+    return true;
+
+    }
+
 }
+
+
