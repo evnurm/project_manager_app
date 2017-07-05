@@ -1,15 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.paint.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.effect.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ProjectsViewController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ProjectsViewController">
    <center>
       <VBox fx:id="projectsContainer" minWidth="-Infinity" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
       </VBox>
    </center>
    <top>
-      <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+      <ToolBar prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: linear-gradient(#444444, #555555);" BorderPane.alignment="CENTER" />
    </top>
+   <bottom>
+      <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-max-height: 50;" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="6.0" prefWidth="600.0" style="-fx-max-height: 50; -fx-background-color: linear-gradient(#555555, #444444);">
+               <children>
+                  <Region HBox.hgrow="ALWAYS" />
+                  <Button alignment="CENTER" mnemonicParsing="false" style="-fx-alignment: center; -fx-background-color: linear-gradient(#444444, #333333);" text="Add a new project" textFill="#c6b8b8" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                     </HBox.margin>
+                     <padding>
+                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                     </padding>
+                  </Button>
+                  <Region HBox.hgrow="ALWAYS" />
+               </children>
+               <padding>
+                  <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+               </padding>
+            </HBox>
+            <HBox maxHeight="71.0" prefHeight="71.0" prefWidth="600.0" style="-fx-max-height: 25; -fx-background-color: #444444;">
+               <children>
+                  <Label text="Project manager " textFill="#b5acac">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </bottom>
 </BorderPane>
