@@ -16,7 +16,7 @@ public class Project implements ListableItem{
     public ArrayList<Task> tasks = new ArrayList<Task>();
 
 
-    public Project(String name, Date beginning, Date DL){
+    public Project(String projectId, String ownerId, String name, String desc, Date beginning, Date DL){
         title = name;
         this.beginning = beginning;
         deadline = DL;

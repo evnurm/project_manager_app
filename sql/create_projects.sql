@@ -4,8 +4,8 @@ CREATE TABLE Projects(
 	owner_id CHAR(6),
     name VARCHAR(30),
     description VARCHAR(150),
-    created TIMESTAMP,
-    deadline TIMESTAMP,
+    created DATE,
+    deadline DATE,
     PRIMARY KEY (project_id),
     FOREIGN KEY (owner_id) REFERENCES Users(user_id)
     

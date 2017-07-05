@@ -1,5 +1,6 @@
 package view;
 
+import controller.Database;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -14,6 +15,7 @@ import model.Task;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -26,8 +28,12 @@ import java.util.ResourceBundle;
 public class ProjectsViewController implements Initializable {
 
     @FXML public VBox projectsContainer;
+
     private static ArrayList<Project> projects = new ArrayList<Project>();
     private static boolean isStartup = true;
+
+    private Database db = Main.getDatabase();
+    private String userid = Main.userid;
 
     private void loadTasksView(Project project) throws IOException {
         FXMLLoader loader = new FXMLLoader();
@@ -44,16 +50,12 @@ public class ProjectsViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        if (isStartup) {
-            //set testing data
-            Project testProject = new Project("Testing project", new java.util.Date(), new java.util.Date());
-            Task[] testTaskData = {new Task("tehtava1"), new Task("tehtava2"), new Task("tehtava3")};
-            for (Task task : testTaskData) {
-                testProject.addTask(task);
-            }
-            projects.add(testProject);
 
-            isStartup = false;
+        ArrayList<Project> projects = new ArrayList<>();
+        try {
+            projects = db.getProjects(userid);
+        } catch (SQLException e) {
+            System.out.println("SQL Exception");
         }
 
         for (ListableItem project : projects) {

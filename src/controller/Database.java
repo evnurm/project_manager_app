@@ -48,7 +48,8 @@ public class Database {
 
     }
 
-    public void signIn(String username, String passwordText){
+    public String signIn(String username, String passwordText){
+        String id = "";
         try {
             // Hashing the password using SHA-256 algorithm.
             MessageDigest md = MessageDigest.getInstance("SHA-256");
@@ -58,11 +59,11 @@ public class Database {
             statement = conn.createStatement();
             String sql = "SELECT user_id FROM Users WHERE username = '" +username + "' AND password  = '" +hashString +"';";
             ResultSet rs = statement.executeQuery(sql);
-
             while(rs.next()){
-                String id = rs.getString("user_id");
-                System.out.println(id);
+                id = rs.getString("user_id");
+
             }
+
 
 
         } catch (NoSuchAlgorithmException e) {
@@ -72,6 +73,7 @@ public class Database {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return id;
     }
 
     public boolean idIsTaken(String id) throws SQLException {

@@ -35,7 +35,24 @@ public class LoginViewController implements Initializable {
 
     }
     public void signIn(){
-        db.signIn(usernameField.getText(), password.getText());
+        Main.userid = db.signIn(usernameField.getText(), password.getText());
+        if(Main.userid == ""){
+            // TODO: tell the user that something went wrong.
+        }else{
+            try {
+                FXMLLoader.load(getClass().getResource("LoginView.fxml"));
+
+                Scene login = new Scene(FXMLLoader.load(getClass().getResource("projectsView.fxml")));
+                Stage stage = (Stage) layout.getScene().getWindow();
+                stage.setScene(login);
+            }catch(IOException e){
+                System.out.println("IO Exception.");
+            }
+
+
+
+        }
+
 
     }
 
