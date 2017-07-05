@@ -1,13 +1,16 @@
 package controller;
+import com.sun.org.apache.regexp.internal.RE;
+import model.Project;
+
 import javax.xml.bind.DatatypeConverter;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
-
-
-
-
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Calendar;
 
 
 /**
@@ -112,6 +115,50 @@ public class Database {
         }catch(NoSuchAlgorithmException e){
             System.out.println("No Such Algorithm...");
         }
+
+    }
+
+    /**
+     * Finds all the projects where the given user is the owner of the project.
+     * @param id The id of the username.
+     * @return A project ArrayList consisting of all the users projects.
+     * @throws SQLException
+     */
+    public ArrayList<Project> getProjects(String id) throws SQLException {
+        String projectId;
+        String ownerId;
+        String name;
+        String desc;
+        Date created;
+        Date deadline;
+
+        statement = conn.createStatement();
+
+
+        String sql = "SELECT * FROM Projects WHERE owner_id ='" +id +"';";
+
+        ResultSet rs  = statement.executeQuery(sql);
+        ArrayList<Project> projects = new ArrayList<>();
+        while(rs.next()){
+            projectId = rs.getString("project_id");
+            ownerId = rs.getString("owner_id");
+            name = rs.getString("name");
+            desc = rs.getString("description");
+            created = rs.getDate("created");
+            deadline = rs.getDate("deadline");
+
+
+
+
+           projects.add(new Project(projectId, ownerId, name, desc, created, deadline);
+
+
+        }
+
+        return projects;
+
+
+
 
     }
 }
