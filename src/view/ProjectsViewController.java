@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import model.ListableItem;
 import model.Project;
 import model.Task;
 
@@ -24,18 +25,18 @@ import java.util.ResourceBundle;
  */
 public class ProjectsViewController implements Initializable {
 
-    private TasksViewController tasksViewController;
     @FXML public VBox projectsContainer;
-    public ArrayList<Project> projects = new ArrayList<Project>();
+    private static ArrayList<Project> projects = new ArrayList<Project>();
+    private static boolean isStartup = true;
 
-    public void viewButtonClicked() throws IOException {
+    private void loadTasksView(Project project) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("tasksView.fxml"));
         Parent root = loader.load(); //this triggers taskViewController's init-method
-        this.tasksViewController = loader.getController();
-        this.tasksViewController.setProjectsViewController(this);
-        this.tasksViewController.setProjectData(this.projects.get(0)); //The project data would be retrieved from
-                                                                       //the UI-project-element that was clicked
+
+        TasksViewController tasksViewController = loader.getController();
+        tasksViewController.setProjectData(project);
+
         Scene tasksViewScene = new Scene(root);
         Stage stage = (Stage)projectsContainer.getScene().getWindow();
         stage.setScene(tasksViewScene);
@@ -43,12 +44,31 @@ public class ProjectsViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //set testing data
-        Project testProject = new Project("Testing project", new java.util.Date(), new java.util.Date());
-        Task[] testTaskData = {new Task("tehtava1"), new Task("tehtava2"), new Task("tehtava3")};
-        for (Task task : testTaskData) {
-            testProject.addTask(task);
+        if (isStartup) {
+            //set testing data
+            Project testProject = new Project("Testing project", new java.util.Date(), new java.util.Date());
+            Task[] testTaskData = {new Task("tehtava1"), new Task("tehtava2"), new Task("tehtava3")};
+            for (Task task : testTaskData) {
+                testProject.addTask(task);
+            }
+            projects.add(testProject);
+
+            isStartup = false;
         }
-        this.projects.add(testProject);
+
+        for (ListableItem project : projects) {
+            ListItem listItem = new ListItem(project) {
+                @Override
+                protected void viewButtonClicked() throws IOException {
+                    loadTasksView((Project)this.item); //in this context we know that the item is a project
+                }
+
+                @Override
+                protected void deleteButtonClicked() {
+                    System.out.println("overriding");
+                }
+            };
+            this.projectsContainer.getChildren().add(listItem);
+        }
     }
 }

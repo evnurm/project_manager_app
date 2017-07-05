@@ -9,12 +9,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import model.ListableItem;
 import model.Project;
 import model.Task;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
@@ -22,12 +22,13 @@ import java.util.ResourceBundle;
  */
 public class TasksViewController implements Initializable{
 
-    private ProjectsViewController projectsViewController;
+    //private ProjectsViewController projectsViewController;
     private Project project;
-    private ArrayList<Task> testTasks = new ArrayList<Task>();
 
     @FXML public Button backButton;
     @FXML public VBox taskContainer;
+    @FXML public Label titleLabel;
+    @FXML public Label descriptionLabel;
 
     public void backButtonClicked() throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("projectsView.fxml"));
@@ -38,18 +39,33 @@ public class TasksViewController implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //taskContainer.getChildren().clear();
     }
 
-    public void setProjectsViewController(ProjectsViewController c) {
-        this.projectsViewController = c;
-    }
+    //public void setProjectsViewController(ProjectsViewController c) {
+    //    this.projectsViewController = c;
+    //}
 
     public void setProjectData(Project project) {
         this.taskContainer.getChildren().clear();
         this.project = project;
-        for (Task task : this.project.tasks) {
-            taskContainer.getChildren().add(new Label(task.title));
+        this.titleLabel.setText(project.getTitle());
+        //this.descriptionLabel.setText(project.getDescription());
+        for (ListableItem task : this.project.tasks) {
+            ListItem listItem = new ListItem(task) {
+                @Override
+                protected void viewButtonClicked() throws IOException {
+                    //TODO: create task view, which this would load
+                }
+
+                @Override
+                protected void deleteButtonClicked() {
+                    project.removeTask((Task)this.item);
+                    taskContainer.getChildren().remove(this);
+                    //TODO: should this interact with the database?
+                }
+            };
+
+            this.taskContainer.getChildren().add(listItem);
         }
     }
 }
