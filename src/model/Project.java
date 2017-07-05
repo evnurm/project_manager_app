@@ -8,6 +8,8 @@ import java.util.Date;
  */
 public class Project implements ListableItem{
 
+    private String id;
+    private String ownerId;
     private String title;
     private String description;
     private Date deadline;
@@ -17,6 +19,8 @@ public class Project implements ListableItem{
 
 
     public Project(String projectId, String ownerId, String name, String desc, Date beginning, Date DL){
+        id = projectId;
+        this.ownerId = ownerId;
         title = name;
         this.beginning = beginning;
         deadline = DL;
@@ -53,4 +57,18 @@ public class Project implements ListableItem{
     public String getDescription() {
         return this.description;
     }
+
+    public String getId(){
+        return id;
+    }
+    public String getOwnerId(){
+        return ownerId;
+    }
+    public Date getCreated(){
+        return beginning;
+    }
+    public Date getDeadline(){
+        return deadline;
+    }
+
 }
