@@ -225,6 +225,19 @@ public class Database {
 
     }
 
+    /**
+     *  Deletes the project with the given id from the database.
+     *  @param projectId    The id of project to be deleted.
+     */
+    public boolean deleteProject(String projectId) throws SQLException {
+
+        statement = conn.createStatement();
+
+        String deletionQuery = "DELETE FROM `Projects` WHERE `project_id` =  " + projectId + ";" ;
+        return statement.execute(deletionQuery);
+
+    }
+
 }
 
 
