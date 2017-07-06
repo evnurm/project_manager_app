@@ -1,6 +1,7 @@
 package controller;
 import com.sun.org.apache.regexp.internal.RE;
 import model.Project;
+import view.Main;
 
 import javax.xml.bind.DatatypeConverter;
 import java.io.UnsupportedEncodingException;
@@ -10,7 +11,7 @@ import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.Date;
 import java.util.Random;
 
 
@@ -182,20 +183,45 @@ public class Database {
 
     }
 
+    public boolean projectIdIsTaken(String id) throws SQLException {
+
+        statement = conn.createStatement();
+        ResultSet rs =statement.executeQuery("SELECT COUNT('project_id') AS 'num'  FROM Projects WHERE project_id = '" + id + "'");
+        int num = 0;
+        while(rs.next()){
+            num = rs.getInt("num");
+        }
+        return num != 0;
+
+
+
+
+
+    }
     /**
      * Creates a new database entry for a new project.
      * @param project
      * @return
      */
-    public boolean addProject(Project project) throws SQLException {
+    public boolean addProject(String name, String desc, String deadline) throws SQLException {
 
         statement = conn.createStatement();
-        String projectId = project.getId();
-        String ownerID = project.getId();
-        String name = project.getTitle();
-        String desc = project.getDescription();
 
-    return true;
+        String projectId = createID(8);
+        String ownerID = Main.userid;
+
+        SimpleDateFormat SQLDateFormat = new SimpleDateFormat("YYYY-MM-dd");
+        String created = SQLDateFormat.format(new Date());
+
+        while(projectIdIsTaken(projectId)){
+            projectId = createID(8);
+        }
+
+
+        String insertionQuery  = "INSERT INTO Projects VALUES('" +projectId +"', '" +ownerID+"', '" + name +"', '" + desc +"', '" + created+"', '" +deadline+"');";
+        return statement.execute(insertionQuery);
+
+
 
     }
 

@@ -110,7 +110,23 @@ public class ProjectsViewController implements Initializable {
             Stage stage = (Stage) layout.getScene().getWindow();
             stage.setScene(login);
         }catch(IOException e){
+                e.printStackTrace();
+        }
 
+    }
+
+    public void addProject(){
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("NewProjectView.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage)layout.getScene().getWindow();
+            Scene newProject = new Scene(root);
+            stage.setScene(newProject);
+
+        }catch(IOException e){
+            e.printStackTrace();
         }
     }
 }

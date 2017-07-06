@@ -1,5 +1,6 @@
 package model;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -64,11 +65,13 @@ public class Project implements ListableItem{
     public String getOwnerId(){
         return ownerId;
     }
-    public Date getCreated(){
-        return beginning;
+    public String getCreated(){
+        SimpleDateFormat SQLformat = new SimpleDateFormat("YYYY-MM-dd");
+        return SQLformat.format(beginning);
     }
-    public Date getDeadline(){
-        return deadline;
+    public String getDeadline(){
+        SimpleDateFormat SQLformat = new SimpleDateFormat("YYYY-MM-dd");
+        return SQLformat.format(deadline);
     }
 
 }

@@ -27,7 +27,7 @@
             <HBox prefHeight="6.0" prefWidth="600.0" style="-fx-max-height: 50; -fx-background-color: linear-gradient(#555555, #444444); -fx-border-color: #333;">
                <children>
                   <Region HBox.hgrow="ALWAYS" />
-                  <Button fx:id="newProjectButton" alignment="CENTER" mnemonicParsing="false" onMouseEntered="#onAddButtonHover" onMouseExited="#onAddButtonHoverOut" style="-fx-alignment: center; -fx-background-color: linear-gradient(#444444, #333333);" text="Add a new project" textFill="#c6b8b8" HBox.hgrow="ALWAYS">
+                  <Button fx:id="newProjectButton" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#addProject" onMouseEntered="#onAddButtonHover" onMouseExited="#onAddButtonHoverOut" style="-fx-alignment: center; -fx-background-color: linear-gradient(#444444, #333333);" text="Add a new project" textFill="#c6b8b8" HBox.hgrow="ALWAYS">
                      <HBox.margin>
                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                      </HBox.margin>
