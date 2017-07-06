@@ -233,7 +233,7 @@ public class Database {
 
         statement = conn.createStatement();
 
-        String deletionQuery = "DELETE FROM `Projects` WHERE `project_id` =  " + projectId + ";" ;
+        String deletionQuery = "DELETE FROM `Projects` WHERE `project_id` =  '"+ projectId + "';" ;
         return statement.execute(deletionQuery);
 
     }

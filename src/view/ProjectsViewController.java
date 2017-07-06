@@ -73,7 +73,25 @@ public class ProjectsViewController implements Initializable {
 
                 @Override
                 protected void deleteButtonClicked() {
-                    System.out.println("overriding");
+                   try {
+                       Project pr = (Project) project;
+                       db.deleteProject(pr.getId());
+
+                       FXMLLoader loader = new FXMLLoader();
+                       loader.setLocation(getClass().getResource("projectsView.fxml"));
+                       Parent root = loader.load();
+
+                       Scene projectsViewScene = new Scene(root);
+                       Stage stage = (Stage)projectsContainer.getScene().getWindow();
+                       stage.setScene(projectsViewScene);
+
+                   } catch(SQLException e){
+                       e.printStackTrace();
+                       System.out.println("Project could not be deleted!");
+                   } catch(IOException e){
+                       e.printStackTrace();
+                   }
+
                 }
             };
             this.projectsContainer.getChildren().add(listItem);
