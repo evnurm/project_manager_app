@@ -23,6 +23,7 @@ public class Project implements ListableItem{
         id = projectId;
         this.ownerId = ownerId;
         title = name;
+        description = desc;
         this.beginning = beginning;
         deadline = DL;
     }

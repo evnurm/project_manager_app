@@ -22,7 +22,6 @@ import java.util.ResourceBundle;
  */
 public class TasksViewController implements Initializable{
 
-    //private ProjectsViewController projectsViewController;
     private Project project;
 
     @FXML public Button backButton;
@@ -41,15 +40,11 @@ public class TasksViewController implements Initializable{
     public void initialize(URL location, ResourceBundle resources) {
     }
 
-    //public void setProjectsViewController(ProjectsViewController c) {
-    //    this.projectsViewController = c;
-    //}
-
     public void setProjectData(Project project) {
         this.taskContainer.getChildren().clear();
         this.project = project;
         this.titleLabel.setText(project.getTitle());
-        //this.descriptionLabel.setText(project.getDescription());
+        this.descriptionLabel.setText(project.getDescription());
         for (ListableItem task : this.project.tasks) {
             ListItem listItem = new ListItem(task) {
                 @Override
