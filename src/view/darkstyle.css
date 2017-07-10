@@ -1,0 +1,30 @@
+.root{
+    /*-fx-font-size: 9pt;*/
+    /*-fx-font-family: "Courier New";*/
+    -fx-base: #444444;   /*toolbarin tausta*/
+    -fx-background: /*rgb(0, 255, 0);*/#777777; /*iso tausta*/
+    -fx-background-color: rgb(255, 0, 0);  /*ylemmän vboxin tausta*/
+    -fx-text-fill: #b5acac;
+}
+
+.tool-bar{
+  -fx-background-color: linear-gradient(#444444, #555555);
+}
+
+.button{
+  -fx-background-color: linear-gradient(#444444, #333333);
+  -fx-text-fill: #b5acac;
+}
+
+/*
+#backButton{
+  -fx-background-color: rgb(255, 0, 0); toimii, jos on sama fx id!
+}
+*/
+.button:hover{
+  -fx-background-color: linear-gradient(#555555, #444444);
+}
+
+.label{
+  -fx-text-fill: #b5acac;
+}
