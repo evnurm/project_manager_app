@@ -8,6 +8,8 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <BorderPane prefHeight="400.0" prefWidth="600.0" stylesheets="@darkstyle.css" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.TasksViewController">
    <center>
       <ScrollPane BorderPane.alignment="CENTER">
@@ -35,4 +37,39 @@
          </BorderPane.margin>
       </VBox>
    </top>
+   <bottom>
+      <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-max-height: 50;" BorderPane.alignment="CENTER">
+         <children>
+            <HBox fx:id="bottomButtonBar" prefHeight="6.0" prefWidth="600.0" style="-fx-max-height: 50;">
+               <children>
+                  <Region HBox.hgrow="ALWAYS" />
+                  <Button fx:id="newTaskButton" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#addTask" style="-fx-alignment: center; " text="Add a new task" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                     </HBox.margin>
+                     <padding>
+                        <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
+                     </padding>
+                  </Button>
+                  <Region HBox.hgrow="ALWAYS" />
+               </children>
+               <padding>
+                  <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+               </padding>
+            </HBox>
+            <HBox fx:id="bottomLabelBar" maxHeight="71.0" prefHeight="71.0" prefWidth="600.0" style="-fx-max-height: 25;">
+               <children>
+                  <Label text="Project manager ">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </bottom>
 </BorderPane>

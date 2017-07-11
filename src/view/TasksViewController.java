@@ -37,6 +37,10 @@ public class TasksViewController implements Initializable{
         stage.setScene(projectsViewScene);
     }
 
+    @FXML public void addTask() {
+
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
     }
