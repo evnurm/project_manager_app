@@ -42,3 +42,11 @@
 #bottomLabelBar{
   -fx-background-color: #444444;
 }
+
+#listItem{
+ -fx-background-color: linear-gradient(#666666, #555555);
+}
+
+#listItemTitle{
+  -fx-text-fill: #ffffff;
+}
