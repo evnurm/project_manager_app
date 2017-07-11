@@ -1,19 +1,28 @@
 .root{
     /*-fx-font-size: 9pt;*/
     /*-fx-font-family: "Courier New";*/
-    -fx-base: #444444;   /*toolbarin tausta*/
-    -fx-background: /*rgb(0, 255, 0);*/#777777; /*iso tausta*/
-    -fx-background-color: rgb(255, 0, 0);  /*ylemmän vboxin tausta*/
-    -fx-text-fill: #b5acac;
+    /*-fx-base: #444444;   toolbarin tausta*/
+    -fx-background: #777777; /*iso tausta*/
+    /*-fx-background-color: #555555  ylemmän vboxin tausta tasks view:ssä*/
+    /*-fx-text-fill: #b5acac;*/
 }
 
 .tool-bar{
   -fx-background-color: linear-gradient(#444444, #555555);
 }
 
+.label{
+  -fx-text-fill: #b5acac;
+}
+
+
 .button{
   -fx-background-color: linear-gradient(#444444, #333333);
   -fx-text-fill: #b5acac;
+}
+
+.button:hover{
+  -fx-background-color: linear-gradient(#555555, #444444);
 }
 
 /*
@@ -21,10 +30,8 @@
   -fx-background-color: rgb(255, 0, 0); toimii, jos on sama fx id!
 }
 */
-.button:hover{
-  -fx-background-color: linear-gradient(#555555, #444444);
-}
 
-.label{
-  -fx-text-fill: #b5acac;
+#deleteButton{
+  -fx-background-color: rgb(200, 55, 55);
+  -fx-text-fill: #000000;
 }
