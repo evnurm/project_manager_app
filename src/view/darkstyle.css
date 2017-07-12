@@ -1,0 +1,44 @@
+.root{
+    /*-fx-font-size: 9pt;*/
+    /*-fx-font-family: "Courier New";*/
+    /*-fx-base: #444444;   toolbarin tausta*/
+    -fx-background: #777777; /*iso tausta*/
+    /*-fx-background-color: #555555  ylemmän vboxin tausta tasks view:ssä*/
+    /*-fx-text-fill: #b5acac;*/
+}
+
+.tool-bar{
+  -fx-background-color: linear-gradient(#444444, #555555);
+}
+
+.label{
+  -fx-text-fill: #b5acac;
+}
+
+.button{
+  -fx-background-color: linear-gradient(#444444, #333333);
+  -fx-text-fill: #b5acac;
+}
+
+.button:hover{
+  -fx-background-color: linear-gradient(#555555, #444444);
+}
+
+/*NOTE: these need to have the same fx:id in order to work*/
+#deleteButton{
+  -fx-background-color: rgb(200, 80, 80);
+  -fx-text-fill: #000000;
+}
+
+#deleteButton:hover{
+  -fx-background-color: rgb(200, 55, 55);
+}
+
+#bottomButtonBar{
+  -fx-background-color: linear-gradient(#555555, #444444);
+  -fx-border-color: #333;
+}
+
+#bottomLabelBar{
+  -fx-background-color: #444444;
+}
