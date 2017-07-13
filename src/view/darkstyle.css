@@ -1,16 +1,7 @@
-/*
-  TODO: -poista turhat metodit jotka muuttaa nappuloiden väriä
-  TODO: -uuden projektin luomisnäkymä
-  TODO: -kirjautumisnäkymät (?)
-*/
+
 
 .root{
-    /*-fx-font-size: 9pt;*/
-    /*-fx-font-family: "Courier New";*/
-    /*-fx-base: #444444;   toolbarin tausta*/
-    -fx-background: #777777; /*iso tausta*/
-    /*-fx-background-color: #555555  ylemmän vboxin tausta tasks view:ssä*/
-    /*-fx-text-fill: #b5acac;*/
+  -fx-background: #777777;
 }
 
 .containerWithGradient{
@@ -23,6 +14,11 @@
 
 .label{
   -fx-text-fill: #b5acac;
+}
+
+.highlightLabel{
+  -fx-font-style: italic;
+  -fx-text-fill: #bc0001
 }
 
 .button{
@@ -58,5 +54,5 @@
 }
 
 #listItemTitle{
-  -fx-text-fill: #ffffff;
+  -fx-text-fill: #aaaaaa;
 }
