@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox fx:id="layout" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: linear-gradient(#444444, #555555);" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.RegistrationViewController">
+   <children>
+      <Label text="Project Manager" textFill="#d7c8c8">
+         <font>
+            <Font size="26.0" />
+         </font>
+         <padding>
+            <Insets bottom="20.0" top="45.0" />
+         </padding>
+      </Label>
+      <Label text="Create an account" textFill="#c6b5b5">
+         <padding>
+            <Insets bottom="30.0" />
+         </padding>
+      </Label>
+      <GridPane hgap="5.0" maxWidth="300.0" vgap="5.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="Username" textFill="#c6b9b9" />
+            <Label text="Password" textFill="#c6b9b9" GridPane.rowIndex="1" />
+            <Label text="Retype password" textFill="#c6b9b9" GridPane.rowIndex="2" />
+            <Label text="First name" textFill="#c6b9b9" GridPane.rowIndex="3" />
+            <TextField fx:id="username" promptText="Username" GridPane.columnIndex="1" />
+            <PasswordField fx:id="password1" promptText="Password" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <PasswordField fx:id="password2" promptText="Retype password" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="firstName" promptText="First name" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label text="Last name" textFill="#c6b9b9" GridPane.rowIndex="4" />
+            <Label text="Email" textFill="#c6b9b9" GridPane.rowIndex="5" />
+            <TextField fx:id="lastName" promptText="Last name" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="email" promptText="Email" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+         </children>
+      </GridPane>
+      <Label fx:id="feedbackLabel">
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+      </Label>
+      <Button fx:id="signUpButton" mnemonicParsing="false" onMouseClicked="#register" onMouseEntered="#onHover" onMouseExited="#onHoverOut" style="-fx-background-color: linear-gradient(#333333, #444444);" text="Create an account" textFill="#d3c4c4">
+         <VBox.margin>
+            <Insets top="20.0" />
+         </VBox.margin>
+      </Button>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Label text="Already have an account? " textFill="#d3cccc" />
+            <Label fx:id="loginLabel" onMouseClicked="#changeLoginView" text="Log in" textFill="#bc3434">
+               <HBox.margin>
+                  <Insets left="7.0" />
+               </HBox.margin>
+            </Label>
+         </children>
+      </HBox>
+   </children>
+</VBox>

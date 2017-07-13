@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox fx:id="layout" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" style="-fx-alignment: top_center; -fx-background-color: linear-gradient(#555555, #444444);" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.LoginViewController">
+   <children>
+      <Label alignment="TOP_CENTER" style="-fx-opacity: 1; -fx-text-fill: #BBBBBB;" text="Project Manager" textFill="#ffffff21">
+         <font>
+            <Font size="33.0" />
+         </font>
+         <padding>
+            <Insets top="5.0" />
+         </padding>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <VBox.margin>
+            <Insets top="100.0" />
+         </VBox.margin>
+      </Label>
+      <TextField fx:id="usernameField" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" promptText="Username" style="-fx-max-width: 250;" VBox.vgrow="ALWAYS">
+         <opaqueInsets>
+            <Insets left="50.0" right="50.0" />
+         </opaqueInsets>
+         <VBox.margin>
+            <Insets top="75.0" />
+         </VBox.margin>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </TextField>
+      <PasswordField fx:id="password" promptText="Password" style="-fx-max-width: 250;">
+         <VBox.margin>
+            <Insets top="15.0" />
+         </VBox.margin>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </PasswordField>
+      <Button fx:id="loginButton" contentDisplay="CENTER" graphicTextGap="6.0" mnemonicParsing="false" onMouseClicked="#signIn" onMouseEntered="#onHover" onMouseExited="#onHoverOut" style="-fx-max-width: 100; -fx-background-color: linear-gradient(#444444, #333333);" text="Log in" textFill="#f0eded72">
+         <VBox.margin>
+            <Insets top="20.0" />
+         </VBox.margin>
+      </Button>
+      <HBox fillHeight="false" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+         <VBox.margin>
+            <Insets top="120.0" />
+         </VBox.margin>
+         <children>
+            <Label text="Not yet registered?" textFill="#ebe8e8b8">
+               <HBox.margin>
+                  <Insets left="15.0" top="50.0" />
+               </HBox.margin>
+            </Label>
+            <Label fx:id="signUpLabel" onMouseClicked="#changeRegistrationView" style="-fx-font-style: italic;" text="Sign up" textFill="#bc0001">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <HBox.margin>
+                  <Insets left="5.0" top="50.0" />
+               </HBox.margin>
+            </Label>
+         </children>
+      </HBox>
+   </children>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+   <padding>
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
+</VBox>
