@@ -43,6 +43,7 @@ public class LoginViewController implements Initializable {
                 FXMLLoader.load(getClass().getResource("LoginView.fxml"));
 
                 Scene login = new Scene(FXMLLoader.load(getClass().getResource("projectsView.fxml")));
+                login.getStylesheets().add(Main.getStylesheetPath());
                 Stage stage = (Stage) layout.getScene().getWindow();
                 stage.setScene(login);
             }catch(IOException e){

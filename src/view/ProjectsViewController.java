@@ -50,12 +50,14 @@ public class ProjectsViewController implements Initializable {
         tasksViewController.setProjectData(project);
 
         Scene tasksViewScene = new Scene(root);
+        tasksViewScene.getStylesheets().add(Main.getStylesheetPath());
         Stage stage = (Stage)projectsContainer.getScene().getWindow();
         stage.setScene(tasksViewScene);
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        //this.layout.getScene().getStylesheets().add(Main.getStylesheetPath());
 
         ArrayList<Project> projects = new ArrayList<>();
         try {
@@ -123,6 +125,7 @@ public class ProjectsViewController implements Initializable {
 
             Stage stage = (Stage)layout.getScene().getWindow();
             Scene newProject = new Scene(root);
+            newProject.getStylesheets().add(Main.getStylesheetPath());
             stage.setScene(newProject);
 
         }catch(IOException e){

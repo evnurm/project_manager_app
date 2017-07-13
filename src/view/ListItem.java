@@ -22,7 +22,7 @@ import java.util.ResourceBundle;
  * The code is modified from the official documentation at:
  * http://docs.oracle.com/javafx/2/fxml_get_started/custom_control.htm
  */
-public abstract class ListItem extends HBox{
+public abstract class ListItem extends HBox implements Initializable{
     public ListableItem item;
     @FXML
     private Label listItemTitle;
@@ -53,4 +53,9 @@ public abstract class ListItem extends HBox{
 
     @FXML
     abstract protected void deleteButtonClicked();
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        this.getStylesheets().add(Main.getStylesheetPath());
+    }
 }

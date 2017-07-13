@@ -18,7 +18,7 @@ public class Main extends Application {
         launch(args);
     }
     public static String userid;
-
+    private static String stylesheetPath = "view/darkstyle.css";
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -33,5 +33,9 @@ public class Main extends Application {
 
     public static Database getDatabase(){
         return db;
+    }
+
+    public static String getStylesheetPath() {
+        return stylesheetPath;
     }
 }
