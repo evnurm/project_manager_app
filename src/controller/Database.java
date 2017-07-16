@@ -176,6 +176,23 @@ public class Database {
 
         }
 
+        sql = "SELECT * FROM Projects WHERE project_id IN(SELECT project_id FROM Member WHERE user_id = '" + id + "')";
+        rs = statement.executeQuery(sql);
+        while(rs.next()){
+            projectId = rs.getString("project_id");
+            ownerId = rs.getString("owner_id");
+            name = rs.getString("name");
+            desc = rs.getString("description");
+            created = rs.getDate("created");
+            deadline = rs.getDate("deadline");
+
+
+
+
+            projects.add(new Project(projectId, ownerId, name, desc, created, deadline));
+
+        }
+
         return projects;
 
 
