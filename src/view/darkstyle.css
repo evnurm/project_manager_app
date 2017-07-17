@@ -37,7 +37,7 @@
 }
 
 #deleteButton:hover{
-  -fx-background-color: rgb(200, 55, 55);
+  -fx-background-color: rgb(220, 100, 100);
 }
 
 #bottomButtonBar{
@@ -50,9 +50,9 @@
 }
 
 #listItem{
- -fx-background-color: linear-gradient(#666666, #555555);
+ -fx-background-color: linear-gradient(#858585, #808080);
 }
 
 #listItemTitle{
-  -fx-text-fill: #aaaaaa;
+  -fx-text-fill: #101010;
 }
