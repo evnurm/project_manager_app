@@ -57,7 +57,6 @@ public class ProjectsViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //this.layout.getScene().getStylesheets().add(Main.getStylesheetPath());
 
         ArrayList<Project> projects = new ArrayList<>();
         try {
@@ -80,22 +79,6 @@ public class ProjectsViewController implements Initializable {
             };
             this.projectsContainer.getChildren().add(listItem);
         }
-    }
-
-    public void onAddButtonHover(){
-        newProjectButton.setStyle("-fx-background-color: linear-gradient(#555555, #444444)");
-
-    }
-    public void onAddButtonHoverOut(){
-        newProjectButton.setStyle("-fx-background-color: linear-gradient(#444444, #333333)");
-    }
-
-    public void onSignOutButtonHover(){
-        signOutButton.setStyle("-fx-background-color: linear-gradient(#555555, #444444)");
-
-    }
-    public void onSignOutButtonHoverOut(){
-        signOutButton.setStyle("-fx-background-color: linear-gradient(#444444, #333333)");
     }
 
     public void signOut(){
