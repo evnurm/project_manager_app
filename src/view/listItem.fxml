@@ -11,7 +11,7 @@
    <Region HBox.hgrow="ALWAYS" />
     <Button fx:id="deleteButton" layoutX="300" onAction="#deleteButtonClicked" text="Delete" />
     <Button fx:id="viewButton" onAction="#viewButtonClicked" text="View" />
-   <Region prefWidth="100.0" HBox.hgrow="NEVER" />
+   <Region prefWidth="30.0" HBox.hgrow="NEVER" />
    <padding>
       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
    </padding>
