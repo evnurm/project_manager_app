@@ -109,6 +109,7 @@ public class ProjectsViewController implements Initializable {
 
 
             Scene login = new Scene(root);
+            login.getStylesheets().add(Main.getStylesheetPath());
             Stage stage = (Stage) layout.getScene().getWindow();
             stage.setScene(login);
         }catch(IOException e){
