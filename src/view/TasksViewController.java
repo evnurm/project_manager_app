@@ -36,7 +36,14 @@ public class TasksViewController implements Initializable{
         stage.setScene(projectsViewScene);
     }
 
-    @FXML public void addTask() {
+    @FXML public void addTask() throws IOException {
+
+        Parent root = FXMLLoader.load(getClass().getResource("NewTaskView.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.show();
+
 
     }
 
