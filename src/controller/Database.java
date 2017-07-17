@@ -217,7 +217,7 @@ public class Database {
     }
     /**
      * Creates a new database entry for a new project.
-     * @param project
+
      * @return
      */
     public boolean addProject(String name, String desc, String deadline) throws SQLException {
@@ -253,6 +253,35 @@ public class Database {
         String deletionQuery = "DELETE FROM `Projects` WHERE `project_id` =  '"+ projectId + "';" ;
         return statement.execute(deletionQuery);
 
+    }
+    private boolean taskIdIsTaken(String id) throws SQLException {
+        statement = conn.createStatement();
+        String sql = "SELECT COUNT(task_id) AS num FROM Tasks WHERE task_id = '" +id +"'";
+        ResultSet rs = statement.executeQuery(sql);
+        int num = 0;
+        while(rs.next()){
+            num = rs.getInt("num");
+
+        }
+        return num != 0;
+
+
+    }
+
+    public boolean addTask(String projectId, String name, String description, String deadline) throws SQLException {
+
+        statement = conn.createStatement();
+
+        Date today = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
+        String created = sdf.format(today);
+
+        String id = this.createID(10);
+        while(taskIdIsTaken(id)){
+            id = createID(10);
+        }
+
+        return statement.execute("INSERT INTO Tasks VALUES('" + id + "', '" + projectId + "', '" + name + "', '" + description + "', '" + created + "', '" + deadline+ "')");
     }
 
 }
