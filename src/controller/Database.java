@@ -280,8 +280,8 @@ public class Database {
         while(taskIdIsTaken(id)){
             id = createID(10);
         }
-
-        return statement.execute("INSERT INTO Tasks VALUES('" + id + "', '" + projectId + "', '" + name + "', '" + description + "', '" + created + "', '" + deadline+ "')");
+        String query = "INSERT INTO Tasks VALUES('" + id + "', '" + projectId + "', '" + name + "', '" + description + "', '" + created + "', '" + deadline+ "')";
+        return statement.execute(query);
     }
 
 }

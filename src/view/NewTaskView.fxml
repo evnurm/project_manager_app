@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="\\@darkstyle.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="\\@darkstyle.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.NewTaskViewController">
    <children>
       <Label text="Create a new task" textFill="#d3caca">
          <font>
@@ -44,7 +44,7 @@
             <Insets left="50.0" right="50.0" top="50.0" />
          </VBox.margin>
       </GridPane>
-      <Button fx:id="addTaskButton" mnemonicParsing="false" text="Create a task">
+      <Button fx:id="addTaskButton" mnemonicParsing="false" onMouseClicked="#addTask" text="Create a task">
          <VBox.margin>
             <Insets top="30.0" />
          </VBox.margin>
