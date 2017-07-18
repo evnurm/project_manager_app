@@ -13,11 +13,14 @@ import javafx.scene.Parent;
 
 public class Main extends Application {
 
-    private static  Database db;
+    private static Database db;
+
     public static void main(String[] args) {
         launch(args);
     }
+
     public static String userid;
+    private String projectID;
 
 
     @Override
@@ -31,7 +34,15 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-    public static Database getDatabase(){
+    public static Database getDatabase() {
         return db;
+    }
+
+    public String getProjectID() {
+        return projectID;
+    }
+
+    public void setProjectID(String id){
+        this.projectID = id;
     }
 }
