@@ -225,7 +225,7 @@ public class Database {
         statement = conn.createStatement();
 
         String projectId = createID(8);
-        String ownerID = Main.userid;
+        String ownerID = Main.getSession().getUserId();
 
         SimpleDateFormat SQLDateFormat = new SimpleDateFormat("YYYY-MM-dd");
         String created = SQLDateFormat.format(new Date());

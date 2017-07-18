@@ -4,6 +4,7 @@ package view;
  */
 
 import controller.Database;
+import controller.Session;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -19,8 +20,7 @@ public class Main extends Application {
         launch(args);
     }
 
-    public static String userid;
-    private String projectID;
+    public static Session session = new Session("", "");
 
 
     @Override
@@ -38,11 +38,7 @@ public class Main extends Application {
         return db;
     }
 
-    public String getProjectID() {
-        return projectID;
-    }
-
-    public void setProjectID(String id){
-        this.projectID = id;
+    public static Session getSession(){
+        return session;
     }
 }

@@ -1,6 +1,7 @@
 package view;
 
 import controller.Database;
+import controller.Session;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -35,7 +36,8 @@ public class ProjectsViewController implements Initializable {
     private static boolean isStartup = true;
 
     private Database db = Main.getDatabase();
-    private String userid = Main.userid;
+    private Session session = Main.getSession();
+    private String userid = session.getUserId();
 
     @FXML public BorderPane layout;
     @FXML public Button newProjectButton;
@@ -68,6 +70,9 @@ public class ProjectsViewController implements Initializable {
             ListItem listItem = new ListItem(project) {
                 @Override
                 protected void viewButtonClicked() throws IOException {
+
+                    Session session = Main.getSession();
+                    session.setProjectId(((Project) project).getId());
                     loadTasksView((Project)this.item); //in this context we know that the item is a project
                 }
 
@@ -117,7 +122,7 @@ public class ProjectsViewController implements Initializable {
     public void signOut(){
         try {
             // Empty the user id in main and return to login view
-            Main.userid = "";
+            session.setUserId("");
 
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("LoginView.fxml"));

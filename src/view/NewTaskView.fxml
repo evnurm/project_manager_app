@@ -8,7 +8,6 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="\\@darkstyle.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label text="Create a new task" textFill="#d3caca">
@@ -37,15 +36,15 @@
             </Label>
             <Label text="Description" GridPane.rowIndex="1" />
             <Label text="Deadine" GridPane.rowIndex="2" />
-            <TextField GridPane.columnIndex="1" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextArea prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="nameField" GridPane.columnIndex="1" />
+            <TextField fx:id="deadlineField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextArea fx:id="descriptionField" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
          <VBox.margin>
             <Insets left="50.0" right="50.0" top="50.0" />
          </VBox.margin>
       </GridPane>
-      <Button mnemonicParsing="false" text="Create a task">
+      <Button fx:id="addTaskButton" mnemonicParsing="false" text="Create a task">
          <VBox.margin>
             <Insets top="30.0" />
          </VBox.margin>

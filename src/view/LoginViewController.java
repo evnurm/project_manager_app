@@ -1,6 +1,7 @@
 package view;
 
 import controller.Database;
+import controller.Session;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -35,8 +36,9 @@ public class LoginViewController implements Initializable {
 
     }
     public void signIn(){
-        Main.userid = db.signIn(usernameField.getText(), password.getText());
-        if(Main.userid == ""){
+        Session session = Main.getSession();
+        session.setUserId(db.signIn(usernameField.getText(), password.getText()));
+        if(session.getUserId().equals("")){
             // TODO: tell the user that something went wrong.
         }else{
             try {
