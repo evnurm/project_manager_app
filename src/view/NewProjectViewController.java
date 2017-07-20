@@ -29,6 +29,7 @@ public class NewProjectViewController implements Initializable{
     @FXML public Button newProjectButton;
 
     private Database db = Main.getDatabase();
+    private Stage oldStage;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -44,20 +45,31 @@ public class NewProjectViewController implements Initializable{
         try {
             db.addProject(name, desc, deadline);
 
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("projectsView.fxml"));
-            Parent root = loader.load();
-
-            Stage stage = (Stage) layout.getScene().getWindow();
-            Scene projects = new Scene(root);
-            stage.setScene(projects);
 
         } catch (SQLException e) {
             System.out.println("SQL Exception");
-        } catch (IOException e) {
-            e.printStackTrace();
+
+        }finally{
+
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("projectsView.fxml"));
+            Parent root = null;
+            try {
+                root = loader.load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            Scene projects = new Scene(root);
+            oldStage.setScene(projects);
+            Stage stage = (Stage) newProjectButton.getScene().getWindow();
+            stage.close();
+
         }
 
 
+    }
+    public void setOldStage(Stage oldStage){
+        this.oldStage = oldStage;
     }
 }

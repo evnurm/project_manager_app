@@ -43,13 +43,10 @@ public class ProjectsViewController implements Initializable {
     @FXML public Button newProjectButton;
     @FXML public Button signOutButton;
 
-    private void loadTasksView(Project project) throws IOException {
+    private void loadTasksView() throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("tasksView.fxml"));
         Parent root = loader.load(); //this triggers taskViewController's init-method
-
-        TasksViewController tasksViewController = loader.getController();
-        tasksViewController.setProjectData(project);
 
         Scene tasksViewScene = new Scene(root);
         Stage stage = (Stage)projectsContainer.getScene().getWindow();
@@ -73,7 +70,7 @@ public class ProjectsViewController implements Initializable {
 
                     Session session = Main.getSession();
                     session.setProjectId(((Project) project).getId());
-                    loadTasksView((Project)this.item); //in this context we know that the item is a project
+                    loadTasksView(); //in this context we know that the item is a project
                 }
 
                 @Override
@@ -144,9 +141,13 @@ public class ProjectsViewController implements Initializable {
             loader.setLocation(getClass().getResource("NewProjectView.fxml"));
             Parent root = loader.load();
 
-            Stage stage = (Stage)layout.getScene().getWindow();
+            NewProjectViewController controller = loader.getController();
+            controller.setOldStage((Stage) signOutButton.getScene().getWindow());
+            Stage stage = new Stage();
+
             Scene newProject = new Scene(root);
             stage.setScene(newProject);
+            stage.show();
 
         }catch(IOException e){
             e.printStackTrace();

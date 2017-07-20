@@ -1,5 +1,7 @@
 package view;
 
+import controller.Database;
+import controller.Session;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,6 +17,8 @@ import model.Task;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
@@ -23,6 +27,10 @@ import java.util.ResourceBundle;
 public class TasksViewController implements Initializable{
 
     private Project project;
+    private Database db = Main.getDatabase();
+    private Session session = Main.getSession();
+    private String userid = session.getUserId();
+    private String projectId = session.getProjectId();
 
     @FXML public Button backButton;
     @FXML public VBox taskContainer;
@@ -38,10 +46,15 @@ public class TasksViewController implements Initializable{
 
     @FXML public void addTask() throws IOException {
 
-        Parent root = FXMLLoader.load(getClass().getResource("NewTaskView.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("NewTaskView.fxml"));
+        Parent root =  fxmlLoader.load();
+        NewTaskViewController controller = fxmlLoader.<NewTaskViewController>getController();
+        controller.setOldStage((Stage) titleLabel.getScene().getWindow());
         Scene scene = new Scene(root);
         Stage stage = new Stage();
         stage.setScene(scene);
+
         stage.show();
 
 
@@ -49,29 +62,30 @@ public class TasksViewController implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-    }
+        ArrayList<Task> tasks = new ArrayList<>();
+        try {
+            tasks = db.getTasks(projectId);
 
-    public void setProjectData(Project project) {
-        this.taskContainer.getChildren().clear();
-        this.project = project;
-        this.titleLabel.setText(project.getTitle());
-        this.descriptionLabel.setText(project.getDescription());
-        for (ListableItem task : this.project.tasks) {
+        } catch (SQLException e) {
+            System.out.println("SQL Exception");
+        }
+
+        for (ListableItem task : tasks) {
             ListItem listItem = new ListItem(task) {
                 @Override
                 protected void viewButtonClicked() throws IOException {
-                    //TODO: create task view, which this would load
+
+
                 }
 
                 @Override
                 protected void deleteButtonClicked() {
-                    project.removeTask((Task)this.item);
-                    taskContainer.getChildren().remove(this);
-                    //TODO: should this interact with the database?
+
                 }
             };
-
             this.taskContainer.getChildren().add(listItem);
         }
     }
+
+
 }
