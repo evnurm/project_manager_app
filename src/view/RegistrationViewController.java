@@ -87,7 +87,7 @@ import java.util.ResourceBundle;
                 if (validatePasswords()) {
 
                     // Check that the email address is of a proper form, i.e. something@example.com
-                    Pattern emailPattern = Pattern.compile("[A-Z0-9]+@+[A-Z0-9]+.[A-Z]{2,3}", Pattern.CASE_INSENSITIVE);
+                    Pattern emailPattern = Pattern.compile("[A-Z0-9]+[.A-Z0-9]*+@[A-Z0-9]+.[A-Z]{2,3}", Pattern.CASE_INSENSITIVE);
                     Matcher matcher = emailPattern.matcher(email.getText());
                     if (matcher.matches()) {
 
