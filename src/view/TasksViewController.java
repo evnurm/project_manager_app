@@ -80,6 +80,17 @@ public class TasksViewController implements Initializable{
 
                 @Override
                 protected void deleteButtonClicked() {
+                    try {
+                        db.deleteTask(((Task)task).getTaskId());
+                        Parent root = FXMLLoader.load(getClass().getResource("tasksView.fxml"));
+                        Stage stage = (Stage) backButton.getScene().getWindow();
+                        Scene scene = new Scene(root);
+                        stage.setScene(scene);
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
 
                 }
             };

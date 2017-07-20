@@ -320,6 +320,12 @@ public class Database {
 
 
     }
+    public boolean deleteTask(String id) throws SQLException {
+
+        statement = conn.createStatement();
+        String deletionQuery = "DELETE FROM Tasks WHERE task_id = '" + id +"';";
+        return statement.execute(deletionQuery);
+    }
 
 }
 
