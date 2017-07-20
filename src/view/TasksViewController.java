@@ -32,8 +32,13 @@ public class TasksViewController implements Initializable{
     public void backButtonClicked() throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("projectsView.fxml"));
         Scene projectsViewScene = new Scene(root);
+        projectsViewScene.getStylesheets().add(Main.getStylesheetPath());
         Stage stage = (Stage)taskContainer.getScene().getWindow();
         stage.setScene(projectsViewScene);
+    }
+
+    @FXML public void addTask() {
+
     }
 
     @Override

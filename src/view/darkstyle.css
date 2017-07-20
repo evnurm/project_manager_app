@@ -1,0 +1,58 @@
+
+
+.root{
+  -fx-background: #777777;
+}
+
+.containerWithGradient{
+  -fx-background-color: linear-gradient(#555555, #444444);
+}
+
+.tool-bar{
+  -fx-background-color: linear-gradient(#444444, #555555);
+}
+
+.label{
+  -fx-text-fill: #b5acac;
+}
+
+.highlightLabel{
+  -fx-font-style: italic;
+  -fx-text-fill: #bc0001
+}
+
+.button{
+  -fx-background-color: linear-gradient(#444444, #333333);
+  -fx-text-fill: #b5acac;
+}
+
+.button:hover{
+  -fx-background-color: linear-gradient(#555555, #444444);
+}
+
+/*NOTE: these need to have the same fx:id in order to work*/
+#deleteButton{
+  -fx-background-color: rgb(200, 80, 80);
+  -fx-text-fill: #000000;
+}
+
+#deleteButton:hover{
+  -fx-background-color: rgb(220, 100, 100);
+}
+
+#bottomButtonBar{
+  -fx-background-color: linear-gradient(#555555, #444444);
+  -fx-border-color: #333;
+}
+
+#bottomLabelBar{
+  -fx-background-color: #444444;
+}
+
+#listItem{
+ -fx-background-color: linear-gradient(#858585, #808080);
+}
+
+#listItemTitle{
+  -fx-text-fill: #101010;
+}

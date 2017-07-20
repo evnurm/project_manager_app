@@ -8,9 +8,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox fx:id="layout" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: linear-gradient(#555555, #444444);" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.NewProjectViewController">
+<VBox fx:id="layout" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.NewProjectViewController">
    <children>
-      <Label contentDisplay="CENTER" text="Create a new project" textFill="#dad0d0">
+      <Label contentDisplay="CENTER" text="Create a new project">
          <VBox.margin>
             <Insets top="20.0" />
          </VBox.margin>
@@ -29,17 +29,17 @@
           <RowConstraints maxHeight="25.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Project name" textFill="#d7c8c8">
+            <Label text="Project name">
                <GridPane.margin>
                   <Insets left="150.0" />
                </GridPane.margin>
             </Label>
-            <Label text="Description" textFill="#dacece" GridPane.rowIndex="1">
+            <Label text="Description" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets left="150.0" />
                </GridPane.margin>
             </Label>
-            <Label text="Deadline" textFill="#c6b8b8" GridPane.rowIndex="2">
+            <Label text="Deadline" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets bottom="30.0" left="150.0" top="30.0" />
                </GridPane.margin>
@@ -64,7 +64,7 @@
             <Insets top="30.0" />
          </VBox.margin>
       </GridPane>
-      <Button fx:id="newProjectButton" mnemonicParsing="false" onMouseClicked="#createNewProject" style="-fx-background-color: linear-gradient(#333333, #444444);" text="Create project" textFill="#c3abab">
+      <Button fx:id="newProjectButton" mnemonicParsing="false" onMouseClicked="#createNewProject" text="Create project">
          <VBox.margin>
             <Insets top="30.0" />
          </VBox.margin>

@@ -32,7 +32,8 @@ public class LoginViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        layout.getStyleClass().add("containerWithGradient");
+        signUpLabel.getStyleClass().add("highlightLabel");
     }
     public void signIn(){
         Main.userid = db.signIn(usernameField.getText(), password.getText());
@@ -43,24 +44,15 @@ public class LoginViewController implements Initializable {
                 FXMLLoader.load(getClass().getResource("LoginView.fxml"));
 
                 Scene login = new Scene(FXMLLoader.load(getClass().getResource("projectsView.fxml")));
+                login.getStylesheets().add(Main.getStylesheetPath());
                 Stage stage = (Stage) layout.getScene().getWindow();
                 stage.setScene(login);
             }catch(IOException e){
                 System.out.println("IO Exception.");
             }
 
-
-
         }
 
-
-    }
-
-    public void onHover(){
-        loginButton.setStyle("-fx-background-color: linear-gradient(#555555, #444444); -fx-max-width: 100");
-    }
-    public void onHoverOut(){
-        loginButton.setStyle("-fx-background-color: linear-gradient(#444444, #333333); -fx-max-width: 100");
     }
 
     public void changeRegistrationView() throws IOException {
@@ -72,6 +64,7 @@ public class LoginViewController implements Initializable {
 
 
         Scene registration = new Scene(root);
+        registration.getStylesheets().add(Main.getStylesheetPath());
         Stage stage = (Stage) layout.getScene().getWindow();
         stage.setScene(registration);
 
