@@ -49,6 +49,11 @@
             <Insets top="20.0" />
          </VBox.margin>
       </Button>
+      <Label fx:id="feedbackLabel" textFill="#bc0001">
+         <VBox.margin>
+            <Insets top="20.0" />
+         </VBox.margin>
+      </Label>
       <HBox fillHeight="false" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
          <VBox.margin>
             <Insets top="120.0" />
