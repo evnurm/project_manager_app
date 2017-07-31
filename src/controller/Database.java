@@ -257,6 +257,7 @@ public class Database {
         return statement.execute(deletionQuery);
 
     }
+
     private boolean taskIdIsTaken(String id) throws SQLException {
         statement = conn.createStatement();
         String sql = "SELECT COUNT(task_id) AS num FROM Tasks WHERE task_id = '" +id +"'";
@@ -326,6 +327,7 @@ public class Database {
         String deletionQuery = "DELETE FROM Tasks WHERE task_id = '" + id +"';";
         return statement.execute(deletionQuery);
     }
+
 
 }
 

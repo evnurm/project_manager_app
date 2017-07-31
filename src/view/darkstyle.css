@@ -1,10 +1,11 @@
+
+
 .root{
-    /*-fx-font-size: 9pt;*/
-    /*-fx-font-family: "Courier New";*/
-    /*-fx-base: #444444;   toolbarin tausta*/
-    -fx-background: #777777; /*iso tausta*/
-    /*-fx-background-color: #555555  ylemmän vboxin tausta tasks view:ssä*/
-    /*-fx-text-fill: #b5acac;*/
+  -fx-background: #777777;
+}
+
+.containerWithGradient{
+  -fx-background-color: linear-gradient(#555555, #444444);
 }
 
 .tool-bar{
@@ -13,6 +14,11 @@
 
 .label{
   -fx-text-fill: #b5acac;
+}
+
+.highlightLabel{
+  -fx-font-style: italic;
+  -fx-text-fill: #bc0001
 }
 
 .button{
@@ -31,7 +37,7 @@
 }
 
 #deleteButton:hover{
-  -fx-background-color: rgb(200, 55, 55);
+  -fx-background-color: rgb(220, 100, 100);
 }
 
 #bottomButtonBar{
@@ -41,4 +47,12 @@
 
 #bottomLabelBar{
   -fx-background-color: #444444;
+}
+
+#listItem{
+ -fx-background-color: linear-gradient(#858585, #808080);
+}
+
+#listItemTitle{
+  -fx-text-fill: #101010;
 }

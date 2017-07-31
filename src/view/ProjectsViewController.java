@@ -49,6 +49,7 @@ public class ProjectsViewController implements Initializable {
         Parent root = loader.load(); //this triggers taskViewController's init-method
 
         Scene tasksViewScene = new Scene(root);
+        tasksViewScene.getStylesheets().add(Main.getStylesheetPath());
         Stage stage = (Stage)projectsContainer.getScene().getWindow();
         stage.setScene(tasksViewScene);
     }
@@ -100,22 +101,6 @@ public class ProjectsViewController implements Initializable {
         }
     }
 
-    public void onAddButtonHover(){
-        newProjectButton.setStyle("-fx-background-color: linear-gradient(#555555, #444444)");
-
-    }
-    public void onAddButtonHoverOut(){
-        newProjectButton.setStyle("-fx-background-color: linear-gradient(#444444, #333333)");
-    }
-
-    public void onSignOutButtonHover(){
-        signOutButton.setStyle("-fx-background-color: linear-gradient(#555555, #444444)");
-
-    }
-    public void onSignOutButtonHoverOut(){
-        signOutButton.setStyle("-fx-background-color: linear-gradient(#444444, #333333)");
-    }
-
     public void signOut(){
         try {
             // Empty the user id in main and return to login view
@@ -127,6 +112,7 @@ public class ProjectsViewController implements Initializable {
 
 
             Scene login = new Scene(root);
+            login.getStylesheets().add(Main.getStylesheetPath());
             Stage stage = (Stage) layout.getScene().getWindow();
             stage.setScene(login);
         }catch(IOException e){
@@ -146,6 +132,7 @@ public class ProjectsViewController implements Initializable {
             Stage stage = new Stage();
 
             Scene newProject = new Scene(root);
+            newProject.getStylesheets().add(Main.getStylesheetPath());
             stage.setScene(newProject);
             stage.show();
 

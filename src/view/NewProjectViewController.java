@@ -33,7 +33,7 @@ public class NewProjectViewController implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        layout.getStyleClass().add("containerWithGradient");
     }
 
     public void createNewProject(){

@@ -40,6 +40,7 @@ public class TasksViewController implements Initializable{
     public void backButtonClicked() throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("projectsView.fxml"));
         Scene projectsViewScene = new Scene(root);
+        projectsViewScene.getStylesheets().add(Main.getStylesheetPath());
         Stage stage = (Stage)taskContainer.getScene().getWindow();
         stage.setScene(projectsViewScene);
     }
@@ -65,12 +66,12 @@ public class TasksViewController implements Initializable{
         ArrayList<Task> tasks = new ArrayList<>();
         try {
             tasks = db.getTasks(projectId);
-
         } catch (SQLException e) {
             System.out.println("SQL Exception");
         }
 
         for (ListableItem task : tasks) {
+
             ListItem listItem = new ListItem(task) {
                 @Override
                 protected void viewButtonClicked() throws IOException {

@@ -35,24 +35,21 @@ import java.util.ResourceBundle;
         @FXML public TextField email;
         @FXML public Button signUpButton;
         @FXML public Label feedbackLabel;
+        @FXML public Label loginLabel;
 
         Database db = Main.getDatabase();
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        layout.getStyleClass().add("containerWithGradient");
+        loginLabel.getStyleClass().add("highlightLabel");
+    }
 
-    }
-    public void onHover(){
-        signUpButton.setStyle("-fx-background-color: linear-gradient(#555555, #444444);");
-
-    }
-    public void onHoverOut(){
-        signUpButton.setStyle("-fx-background-color: linear-gradient(#333333, #444444)");
-    }
     public void changeLoginView() throws IOException {
         FXMLLoader.load(getClass().getResource("LoginView.fxml"));
         Scene login = new Scene( FXMLLoader.load(getClass().getResource("LoginView.fxml")));
+        login.getStylesheets().add(Main.getStylesheetPath());
         Stage stage = (Stage) layout.getScene().getWindow();
         stage.setScene(login);
 

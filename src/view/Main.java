@@ -22,13 +22,20 @@ public class Main extends Application {
 
     public static Session session = new Session("", "");
 
+    /*
+     * The default javafx stylesheet is com/sun/javafx/scene/control/skin/modena/modena.css
+     * Older version is com/sun/javafx/scene/control/skin/caspian/caspian.css
+     * The custom css for this project is view/darkstyle.css
+     */
+    private static String stylesheetPath = "view/darkstyle.css";
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("LoginView.fxml"));
         primaryStage.setTitle("Project manager");
-
-        primaryStage.setScene(new Scene(root, 400, 600));
+        Scene loginView = new Scene(root, 400, 600);
+        loginView.getStylesheets().add(getStylesheetPath());
+        primaryStage.setScene(loginView);
         db = new Database();
 
         primaryStage.show();
@@ -40,5 +47,9 @@ public class Main extends Application {
 
     public static Session getSession(){
         return session;
+    }
+
+    public static String getStylesheetPath() {
+        return stylesheetPath;
     }
 }
