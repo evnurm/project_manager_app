@@ -61,6 +61,7 @@ public class NewProjectViewController implements Initializable{
             }
 
             Scene projects = new Scene(root);
+            root.getStylesheets().add(Main.getStylesheetPath());
             oldStage.setScene(projects);
             Stage stage = (Stage) newProjectButton.getScene().getWindow();
             stage.close();

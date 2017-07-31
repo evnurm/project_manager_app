@@ -83,8 +83,8 @@ public class ProjectsViewController implements Initializable {
                        FXMLLoader loader = new FXMLLoader();
                        loader.setLocation(getClass().getResource("projectsView.fxml"));
                        Parent root = loader.load();
-
                        Scene projectsViewScene = new Scene(root);
+                       projectsViewScene.getStylesheets().add(Main.getStylesheetPath());
                        Stage stage = (Stage)projectsContainer.getScene().getWindow();
                        stage.setScene(projectsViewScene);
 

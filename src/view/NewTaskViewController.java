@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -22,6 +23,7 @@ import java.util.ResourceBundle;
  */
 public class NewTaskViewController implements Initializable {
 
+    @FXML public VBox layout;
     @FXML public Button addTaskButton;
     @FXML public TextField nameField;
     @FXML public TextArea descriptionField;
@@ -34,7 +36,7 @@ public class NewTaskViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        layout.getStyleClass().add("containerWithGradient");
     }
 
     public void addTask(){
@@ -50,6 +52,7 @@ public class NewTaskViewController implements Initializable {
             try {
                 Parent root = FXMLLoader.load(getClass().getResource("tasksView.fxml"));
                 Scene scene = new Scene(root);
+                scene.getStylesheets().add(Main.getStylesheetPath());
                 oldStage.setScene(scene);
             } catch (IOException e) {
                 e.printStackTrace();

@@ -53,6 +53,7 @@ public class TasksViewController implements Initializable{
         NewTaskViewController controller = fxmlLoader.<NewTaskViewController>getController();
         controller.setOldStage((Stage) titleLabel.getScene().getWindow());
         Scene scene = new Scene(root);
+        root.getStylesheets().add(Main.getStylesheetPath());
         Stage stage = new Stage();
         stage.setScene(scene);
 
@@ -87,6 +88,7 @@ public class TasksViewController implements Initializable{
                         Parent root = FXMLLoader.load(getClass().getResource("tasksView.fxml"));
                         Stage stage = (Stage) backButton.getScene().getWindow();
                         Scene scene = new Scene(root);
+                        root.getStylesheets().add(Main.getStylesheetPath());
                         stage.setScene(scene);
                     } catch (SQLException e) {
                         e.printStackTrace();
