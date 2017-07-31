@@ -328,6 +328,18 @@ public class Database {
         return statement.execute(deletionQuery);
     }
 
+    public String getProjectDescription(String projectId) throws SQLException {
+        statement = conn.createStatement();
+        String sql = "SELECT description FROM Projects WHERE project_id ='" + projectId + "';";
+        ResultSet rs = statement.executeQuery(sql);
+        if (rs.next()) {
+            String description = rs.getString("description");
+            return description;
+        }
+        else {
+            return "Description not found";
+        }
+    }
 
 }
 
