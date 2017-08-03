@@ -4,6 +4,7 @@ package view;
  */
 
 import controller.Database;
+import controller.Session;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -13,11 +14,14 @@ import javafx.scene.Parent;
 
 public class Main extends Application {
 
-    private static  Database db;
+    private static Database db;
+
     public static void main(String[] args) {
         launch(args);
     }
-    public static String userid;
+
+    public static Session session = new Session("", "");
+
     /*
      * The default javafx stylesheet is com/sun/javafx/scene/control/skin/modena/modena.css
      * Older version is com/sun/javafx/scene/control/skin/caspian/caspian.css
@@ -37,8 +41,12 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-    public static Database getDatabase(){
+    public static Database getDatabase() {
         return db;
+    }
+
+    public static Session getSession(){
+        return session;
     }
 
     public static String getStylesheetPath() {

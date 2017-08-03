@@ -1,6 +1,7 @@
 package view;
 
 import controller.Database;
+import controller.Session;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -29,6 +30,7 @@ public class LoginViewController implements Initializable {
    @FXML public PasswordField password;
    @FXML public Button loginButton;
    @FXML public Label signUpLabel;
+   @FXML public Label feedbackLabel;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -36,9 +38,10 @@ public class LoginViewController implements Initializable {
         signUpLabel.getStyleClass().add("highlightLabel");
     }
     public void signIn(){
-        Main.userid = db.signIn(usernameField.getText(), password.getText());
-        if(Main.userid == ""){
-            // TODO: tell the user that something went wrong.
+        Session session = Main.getSession();
+        session.setUserId(db.signIn(usernameField.getText(), password.getText()));
+        if(session.getUserId().equals("")){
+            feedbackLabel.setText("Incorrect login credentials.");
         }else{
             try {
                 FXMLLoader.load(getClass().getResource("LoginView.fxml"));

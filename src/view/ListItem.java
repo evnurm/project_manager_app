@@ -15,7 +15,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * Created by Alvar on 22.6.2017.
+ * Created b
+ *                                                                                      qwy Alvar on 22.6.2017.
  * A controller of a general list item in a UI. A list item could
  * be e.g. the ui-element of a project in the projects view or a task in the tasks view.
  *

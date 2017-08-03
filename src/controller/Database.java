@@ -1,10 +1,12 @@
 package controller;
 import com.sun.org.apache.regexp.internal.RE;
 import model.Project;
+import model.Task;
 import view.Main;
 
 import javax.xml.bind.DatatypeConverter;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
@@ -22,6 +24,7 @@ public class Database {
 
     Connection conn;
     Statement statement;
+
 
 
     public Database(){
@@ -52,19 +55,19 @@ public class Database {
 
     }
 
-    public String createID(int length) {
 
-        Random rand = new Random();
-        char[] base64 = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
-                'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '-', '/',};
-        char[] id = new char[length];
+        public String createID(int length) {
 
-        for (int i = 1; i <= length; i++) {
-            id[i - 1] = base64[rand.nextInt(64)];
+            Random rand = new Random();
+            char[] base64 = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+                    'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '-', '/'};
+            String id = "";
+            for (int i = 1; i <= length; i++) {
+                id =  id + base64[rand.nextInt(64)];
 
-        }
+            }
 
-        return new String(id);
+            return id;
     }
 
     public String signIn(String username, String passwordText){
@@ -176,6 +179,23 @@ public class Database {
 
         }
 
+        sql = "SELECT * FROM Projects WHERE project_id IN(SELECT project_id FROM Member WHERE user_id = '" + id + "')";
+        rs = statement.executeQuery(sql);
+        while(rs.next()){
+            projectId = rs.getString("project_id");
+            ownerId = rs.getString("owner_id");
+            name = rs.getString("name");
+            desc = rs.getString("description");
+            created = rs.getDate("created");
+            deadline = rs.getDate("deadline");
+
+
+
+
+            projects.add(new Project(projectId, ownerId, name, desc, created, deadline));
+
+        }
+
         return projects;
 
 
@@ -200,7 +220,7 @@ public class Database {
     }
     /**
      * Creates a new database entry for a new project.
-     * @param project
+
      * @return
      */
     public boolean addProject(String name, String desc, String deadline) throws SQLException {
@@ -208,7 +228,7 @@ public class Database {
         statement = conn.createStatement();
 
         String projectId = createID(8);
-        String ownerID = Main.userid;
+        String ownerID = Main.getSession().getUserId();
 
         SimpleDateFormat SQLDateFormat = new SimpleDateFormat("YYYY-MM-dd");
         String created = SQLDateFormat.format(new Date());
@@ -236,6 +256,89 @@ public class Database {
         String deletionQuery = "DELETE FROM `Projects` WHERE `project_id` =  '"+ projectId + "';" ;
         return statement.execute(deletionQuery);
 
+    }
+
+    private boolean taskIdIsTaken(String id) throws SQLException {
+        statement = conn.createStatement();
+        String sql = "SELECT COUNT(task_id) AS num FROM Tasks WHERE task_id = '" +id +"'";
+        ResultSet rs = statement.executeQuery(sql);
+        int num = 0;
+        while(rs.next()){
+            num = rs.getInt("num");
+
+        }
+        return num != 0;
+
+
+    }
+
+    public boolean addTask(String projectId, String name, String description, String deadline) throws SQLException {
+
+        statement = conn.createStatement();
+
+        Date today = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
+        String created = sdf.format(today);
+
+        String id = createID(10);
+        while(taskIdIsTaken(id)){
+            id = createID(10);
+        }
+        String query = "INSERT INTO Tasks VALUES('" + id + "', '" + projectId + "', '" + name + "', '" + description + "', '" + created + "', '" + deadline+ "')";
+        return statement.execute(query);
+    }
+
+    public ArrayList<Task> getTasks(String projectId) throws SQLException {
+
+        ArrayList<Task> tasks = new ArrayList<>();
+
+        statement = conn.createStatement();
+        String sql = "SELECT * FROM Tasks WHERE project_id = '" + projectId +"';";
+
+        String projectID;
+        String taskID;
+        String name;
+        String desc;
+        Date created;
+        Date dl;
+
+        ResultSet rs = statement.executeQuery(sql);
+
+        while(rs.next()){
+
+            projectID = rs.getString("project_id");
+            taskID = rs.getString("task_id");
+            name = rs.getString("name");
+            desc = rs.getString("description");
+            created = rs.getDate("created");
+            dl = rs.getDate("deadline");
+
+            Task task = new Task(taskID, projectID, name, desc, created, dl);
+            tasks.add(task);
+
+        }
+        return tasks;
+
+
+    }
+    public boolean deleteTask(String id) throws SQLException {
+
+        statement = conn.createStatement();
+        String deletionQuery = "DELETE FROM Tasks WHERE task_id = '" + id +"';";
+        return statement.execute(deletionQuery);
+    }
+
+    public String getProjectDescription(String projectId) throws SQLException {
+        statement = conn.createStatement();
+        String sql = "SELECT description FROM Projects WHERE project_id ='" + projectId + "';";
+        ResultSet rs = statement.executeQuery(sql);
+        if (rs.next()) {
+            String description = rs.getString("description");
+            return description;
+        }
+        else {
+            return "Description not found";
+        }
     }
 
 }

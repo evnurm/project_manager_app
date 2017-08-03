@@ -1,6 +1,7 @@
 package view;
 
 import controller.Database;
+import controller.Session;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -18,59 +19,52 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 /**
- * Created by Viljami on 6.7.2017.
+ * Created by Viljami on 17.7.2017.
  */
-public class NewProjectViewController implements Initializable{
+public class NewTaskViewController implements Initializable {
 
     @FXML public VBox layout;
+    @FXML public Button addTaskButton;
     @FXML public TextField nameField;
     @FXML public TextArea descriptionField;
     @FXML public TextField deadlineField;
-    @FXML public Button newProjectButton;
 
-    private Database db = Main.getDatabase();
-    private Stage oldStage;
+    Database db  = Main.getDatabase();
+    Session session = Main.getSession();
+    String projectId = session.getProjectId();
+    Stage oldStage;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         layout.getStyleClass().add("containerWithGradient");
     }
 
-    public void createNewProject(){
+    public void addTask(){
 
-        String name     = nameField.getText();
-        String desc     = descriptionField.getText();
+        String name = nameField.getText();
+        String description = descriptionField.getText();
         String deadline = deadlineField.getText();
-
         try {
-            db.addProject(name, desc, deadline);
-
-
+            db.addTask(projectId, name, description, deadline );
         } catch (SQLException e) {
-            System.out.println("SQL Exception");
-
+            e.printStackTrace();
         }finally{
-
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("projectsView.fxml"));
-            Parent root = null;
             try {
-                root = loader.load();
+                Parent root = FXMLLoader.load(getClass().getResource("tasksView.fxml"));
+                Scene scene = new Scene(root);
+                scene.getStylesheets().add(Main.getStylesheetPath());
+                oldStage.setScene(scene);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-            Scene projects = new Scene(root);
-            root.getStylesheets().add(Main.getStylesheetPath());
-            oldStage.setScene(projects);
-            Stage stage = (Stage) newProjectButton.getScene().getWindow();
+            Stage stage  = (Stage) addTaskButton.getScene().getWindow();
             stage.close();
-
         }
 
 
     }
-    public void setOldStage(Stage oldStage){
+
+    public void setOldStage(Stage oldStage) {
         this.oldStage = oldStage;
     }
 }
