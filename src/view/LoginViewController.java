@@ -44,9 +44,7 @@ public class LoginViewController implements Initializable {
             feedbackLabel.setText("Incorrect login credentials.");
         }else{
             try {
-                FXMLLoader.load(getClass().getResource("LoginView.fxml"));
-
-                Scene login = new Scene(FXMLLoader.load(getClass().getResource("projectsView.fxml")));
+                Scene login = new Scene(FXMLLoader.load(getClass().getResource("mainView.fxml")));
                 login.getStylesheets().add(Main.getStylesheetPath());
                 Stage stage = (Stage) layout.getScene().getWindow();
                 stage.setScene(login);
