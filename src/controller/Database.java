@@ -50,8 +50,9 @@ public class Database {
          }catch(ClassNotFoundException e){
              System.out.println("Class not found.");
 
-         }catch (SQLException e){
-             System.out.println("SQL Exception");
+         }catch (SQLException e) {
+             e.printStackTrace();
+
          }
 
     }

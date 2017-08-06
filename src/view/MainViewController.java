@@ -5,11 +5,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import model.Project;
 import model.User;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
@@ -18,10 +22,19 @@ import java.util.ResourceBundle;
 public class MainViewController implements Initializable {
 
     @FXML private Label usernameLabel;
+    @FXML private VBox projectMenu;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         usernameLabel.setText(Main.getSession().getUser().getFirstName() + " " + Main.getSession().getUser().getLastName());
+        try {
+            ArrayList<Project> projects = Main.getDatabase().getProjects(Main.getSession().getUser().getId());
+            for(Project pr : projects){
+                projectMenu.getChildren().add(new Label(pr.getTitle()));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
 
     }
