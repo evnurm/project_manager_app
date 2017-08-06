@@ -30,7 +30,17 @@ public class MainViewController implements Initializable {
         try {
             ArrayList<Project> projects = Main.getDatabase().getProjects(Main.getSession().getUser().getId());
             for(Project pr : projects){
-                projectMenu.getChildren().add(new Label(pr.getTitle()));
+                projectMenu.getChildren().add(new ListItem(pr) {
+                    @Override
+                    protected void viewButtonClicked() throws IOException {
+
+                    }
+
+                    @Override
+                    protected void deleteButtonClicked() {
+
+                    }
+                });
             }
         } catch (SQLException e) {
             e.printStackTrace();
