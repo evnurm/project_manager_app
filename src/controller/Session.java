@@ -1,11 +1,13 @@
 package controller;
 
+import model.User;
+
 /**
  * This class is designed to be holder of relevant information regarding getting user and project information.
  */
 
 public class Session {
-
+    private User user;
     private String userId;
     private String projectId;
 
@@ -13,6 +15,11 @@ public class Session {
         this.userId = userId;
         this.projectId = projectId;
 
+    }
+
+    public Session(User user, String projectId){
+        this.user = user;
+        this.projectId = projectId;
     }
 
     public String getUserId() {
@@ -28,5 +35,12 @@ public class Session {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public void setUser(User user){
+        this.user = user;
+    }
+    public User getUser(){
+        return user;
     }
 }

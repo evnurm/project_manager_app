@@ -2,6 +2,7 @@ package controller;
 import com.sun.org.apache.regexp.internal.RE;
 import model.Project;
 import model.Task;
+import model.User;
 import view.Main;
 
 import javax.xml.bind.DatatypeConverter;
@@ -70,8 +71,12 @@ public class Database {
             return id;
     }
 
-    public String signIn(String username, String passwordText){
+    public User signIn(String username, String passwordText){
         String id = "";
+        String fname;
+        String lname;
+        String email;
+        User user = new User("", "", "", "");
         try {
             // Hashing the password using SHA-256 algorithm.
             MessageDigest md = MessageDigest.getInstance("SHA-256");
@@ -79,10 +84,14 @@ public class Database {
             String hashString = DatatypeConverter.printHexBinary(passwordHash).toLowerCase();
 
             statement = conn.createStatement();
-            String sql = "SELECT user_id FROM Users WHERE username = '" +username + "' AND password  = '" +hashString +"';";
+            String sql = "SELECT * FROM Users WHERE username = '" +username + "' AND password  = '" +hashString +"';";
             ResultSet rs = statement.executeQuery(sql);
             while(rs.next()){
                 id = rs.getString("user_id");
+                fname = rs.getString("first_name");
+                lname = rs.getString("last_name");
+                email = rs.getString("email");
+                user = new User(id, fname, lname, email);
 
             }
 
@@ -95,7 +104,7 @@ public class Database {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return id;
+        return user;
     }
 
     public boolean idIsTaken(String id) throws SQLException {

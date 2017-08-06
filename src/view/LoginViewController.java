@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import model.User;
 
 import java.awt.*;
 import java.io.IOException;
@@ -32,15 +33,18 @@ public class LoginViewController implements Initializable {
    @FXML public Label signUpLabel;
    @FXML public Label feedbackLabel;
 
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         layout.getStyleClass().add("containerWithGradient");
         signUpLabel.getStyleClass().add("highlightLabel");
     }
     public void signIn(){
         Session session = Main.getSession();
-        session.setUserId(db.signIn(usernameField.getText(), password.getText()));
-        if(session.getUserId().equals("")){
+        session.setUser(db.signIn(usernameField.getText(), password.getText()));
+
+        if(session.getUser().getId().equals("")){
             feedbackLabel.setText("Incorrect login credentials.");
         }else{
             try {
@@ -49,7 +53,7 @@ public class LoginViewController implements Initializable {
                 Stage stage = (Stage) layout.getScene().getWindow();
                 stage.setScene(login);
             }catch(IOException e){
-                System.out.println("IO Exception.");
+                e.printStackTrace();
             }
 
         }
