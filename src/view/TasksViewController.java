@@ -76,27 +76,12 @@ public class TasksViewController implements Initializable{
 
             ListItem listItem = new ListItem(task) {
                 @Override
-                protected void viewButtonClicked() throws IOException {
+                protected void onClick() throws IOException {
 
 
                 }
 
-                @Override
-                protected void deleteButtonClicked() {
-                    try {
-                        db.deleteTask(((Task)task).getTaskId());
-                        Parent root = FXMLLoader.load(getClass().getResource("tasksView.fxml"));
-                        Stage stage = (Stage) backButton.getScene().getWindow();
-                        Scene scene = new Scene(root);
-                        root.getStylesheets().add(Main.getStylesheetPath());
-                        stage.setScene(scene);
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
 
-                }
             };
             this.taskContainer.getChildren().add(listItem);
         }

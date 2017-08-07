@@ -47,24 +47,10 @@ public class NewProjectViewController implements Initializable{
 
 
         } catch (SQLException e) {
-            System.out.println("SQL Exception");
+           e.printStackTrace();
 
         }finally{
 
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("projectsView.fxml"));
-            Parent root = null;
-            try {
-                root = loader.load();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            Scene projects = new Scene(root);
-            root.getStylesheets().add(Main.getStylesheetPath());
-            oldStage.setScene(projects);
-            Stage stage = (Stage) newProjectButton.getScene().getWindow();
-            stage.close();
 
         }
 

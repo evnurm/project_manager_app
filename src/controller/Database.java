@@ -1,18 +1,15 @@
 package controller;
-import com.sun.org.apache.regexp.internal.RE;
+
 import model.Project;
 import model.Task;
 import model.User;
 import view.Main;
-
 import javax.xml.bind.DatatypeConverter;
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
@@ -235,10 +232,11 @@ public class Database {
      */
     public boolean addProject(String name, String desc, String deadline) throws SQLException {
 
+
         statement = conn.createStatement();
 
         String projectId = createID(8);
-        String ownerID = Main.getSession().getUserId();
+        String ownerID = Main.getSession().getUser().getId();
 
         SimpleDateFormat SQLDateFormat = new SimpleDateFormat("YYYY-MM-dd");
         String created = SQLDateFormat.format(new Date());
@@ -249,6 +247,7 @@ public class Database {
 
 
         String insertionQuery  = "INSERT INTO Projects VALUES('" +projectId +"', '" +ownerID+"', '" + name +"', '" + desc +"', '" + created+"', '" +deadline+"');";
+        System.out.println(insertionQuery);
         return statement.execute(insertionQuery);
 
 

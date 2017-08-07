@@ -67,35 +67,12 @@ public class ProjectsViewController implements Initializable {
         for (ListableItem project : projects) {
             ListItem listItem = new ListItem(project) {
                 @Override
-                protected void viewButtonClicked() throws IOException {
+                protected void onClick() throws IOException {
 
-                    Session session = Main.getSession();
-                    session.setProjectId(((Project) project).getId());
-                    loadTasksView(); //in this context we know that the item is a project
-                }
-
-                @Override
-                protected void deleteButtonClicked() {
-                   try {
-                       Project pr = (Project) project;
-                       db.deleteProject(pr.getId());
-
-                       FXMLLoader loader = new FXMLLoader();
-                       loader.setLocation(getClass().getResource("projectsView.fxml"));
-                       Parent root = loader.load();
-                       Scene projectsViewScene = new Scene(root);
-                       projectsViewScene.getStylesheets().add(Main.getStylesheetPath());
-                       Stage stage = (Stage)projectsContainer.getScene().getWindow();
-                       stage.setScene(projectsViewScene);
-
-                   } catch(SQLException e){
-                       e.printStackTrace();
-                       System.out.println("Project could not be deleted!");
-                   } catch(IOException e){
-                       e.printStackTrace();
-                   }
 
                 }
+
+
             };
             this.projectsContainer.getChildren().add(listItem);
         }

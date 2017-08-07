@@ -23,7 +23,7 @@ public class MainViewController implements Initializable {
 
     @FXML private Label usernameLabel;
     @FXML private VBox projectMenu;
-
+    @FXML private Label projectTitle;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         usernameLabel.setText(Main.getSession().getUser().getFirstName() + " " + Main.getSession().getUser().getLastName());
@@ -32,14 +32,11 @@ public class MainViewController implements Initializable {
             for(Project pr : projects){
                 projectMenu.getChildren().add(new ListItem(pr) {
                     @Override
-                    protected void viewButtonClicked() throws IOException {
+                    protected void onClick() throws IOException {
+                        projectTitle.setText(pr.getTitle());
 
                     }
 
-                    @Override
-                    protected void deleteButtonClicked() {
-
-                    }
                 });
             }
         } catch (SQLException e) {
@@ -54,6 +51,19 @@ public class MainViewController implements Initializable {
             Scene scene = new Scene(FXMLLoader.load(getClass().getResource("LoginView.fxml")));
             Stage stage = (Stage) usernameLabel.getScene().getWindow();
             stage.setScene(scene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void openNewProjectWindow(){
+
+        try {
+            Scene scene  = new Scene(FXMLLoader.load(getClass().getResource("NewProjectView.fxml")));
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.show();
+
         } catch (IOException e) {
             e.printStackTrace();
         }

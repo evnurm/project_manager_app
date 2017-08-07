@@ -50,10 +50,8 @@ public abstract class ListItem extends HBox implements Initializable{
     }
 */
     @FXML
-    abstract protected void viewButtonClicked() throws IOException;
+    abstract protected void onClick() throws IOException;
 
-    @FXML
-    abstract protected void deleteButtonClicked();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
