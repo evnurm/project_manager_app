@@ -23,7 +23,7 @@ import java.util.Random;
 public class Database {
 
     Connection conn;
-    Statement statement;
+    PreparedStatement statement;
 
 
 
@@ -50,7 +50,7 @@ public class Database {
              System.out.println("Class not found.");
 
          }catch (SQLException e){
-             System.out.println("SQL Exception");
+             e.printStackTrace();
          }
 
     }
@@ -78,9 +78,11 @@ public class Database {
             byte[] passwordHash = md.digest(passwordText.getBytes("UTF-8"));
             String hashString = DatatypeConverter.printHexBinary(passwordHash).toLowerCase();
 
-            statement = conn.createStatement();
-            String sql = "SELECT user_id FROM Users WHERE username = '" +username + "' AND password  = '" +hashString +"';";
-            ResultSet rs = statement.executeQuery(sql);
+            statement = conn.prepareStatement("SELECT user_id FROM Users WHERE username = ? AND password  = ?;");
+            statement.setString(1, username);
+            statement.setString(2, hashString);
+
+            ResultSet rs = statement.executeQuery();
             while(rs.next()){
                 id = rs.getString("user_id");
 
@@ -100,23 +102,22 @@ public class Database {
 
     public boolean idIsTaken(String id) throws SQLException {
 
-            statement = conn.createStatement();
-            ResultSet rs =statement.executeQuery("SELECT COUNT('user_id') AS 'num'  FROM Users WHERE user_id = '" + id + "'");
+            statement = conn.prepareStatement("SELECT COUNT('user_'id') AS 'num' FROM Users WHERE user_id = ?");
+            statement.setString(1,id);
+
+
+            ResultSet rs = statement.executeQuery();
             int num = 0;
                     while(rs.next()){
                         num = rs.getInt("num");
                     }
                     return num != 0;
 
-
-
-
-
     }
 
     public boolean usernameIsTaken(String username) throws SQLException {
-        statement = conn.createStatement();
-        ResultSet rs =statement.executeQuery("SELECT COUNT('user_id') AS 'num'  FROM Users WHERE username = '" + username+ "'");
+        statement = conn.prepareStatement("SELECT COUNT('user_id') AS 'num'  FROM Users WHERE username = ?");
+        ResultSet rs = statement.executeQuery();
         int num = 0;
         while(rs.next()){
             num = rs.getInt("num");
@@ -134,8 +135,15 @@ public class Database {
             String hashString = DatatypeConverter.printHexBinary(hash).toLowerCase();
 
             // Now trying to insert the values into database.
-            statement = conn.createStatement();
-            statement.execute("INSERT INTO Users VALUES('" + userId +"', '" +username +"', '" + hashString +"', '" + fname +"', '" +lname +"', '" + email+"')");
+            statement = conn.prepareStatement("INSERT INTO Users VALUES(?,?,?,?,?,?)");
+            statement.setString(1,userId);
+            statement.setString(2,username);
+            statement.setString(3,password);
+            statement.setString(4,fname);
+            statement.setString(5, lname);
+            statement.setString(6, email);
+
+            statement.execute();
         }catch(NoSuchAlgorithmException e){
             System.out.println("No Such Algorithm...");
         }
@@ -156,12 +164,9 @@ public class Database {
         Date created;
         Date deadline;
 
-        statement = conn.createStatement();
-
-
-        String sql = "SELECT * FROM Projects WHERE owner_id ='" +id +"';";
-
-        ResultSet rs  = statement.executeQuery(sql);
+        statement = conn.prepareStatement("SELECT * FROM Projects WHERE owner_id = ? ;");
+        statement.setString(1,id);
+        ResultSet rs  = statement.executeQuery();
         ArrayList<Project> projects = new ArrayList<>();
         while(rs.next()){
             projectId = rs.getString("project_id");
@@ -179,8 +184,9 @@ public class Database {
 
         }
 
-        sql = "SELECT * FROM Projects WHERE project_id IN(SELECT project_id FROM Member WHERE user_id = '" + id + "')";
-        rs = statement.executeQuery(sql);
+        statement = conn.prepareStatement("SELECT * FROM Projects WHERE project_id IN(SELECT project_id FROM Member WHERE user_id = ?)");
+        statement.setString(1,id);
+        rs = statement.executeQuery();
         while(rs.next()){
             projectId = rs.getString("project_id");
             ownerId = rs.getString("owner_id");
@@ -205,18 +211,16 @@ public class Database {
 
     public boolean projectIdIsTaken(String id) throws SQLException {
 
-        statement = conn.createStatement();
-        ResultSet rs =statement.executeQuery("SELECT COUNT('project_id') AS 'num'  FROM Projects WHERE project_id = '" + id + "'");
+        PreparedStatement stmt = conn.prepareStatement("SELECT COUNT('project_id') AS 'num'  FROM Projects WHERE project_id = ?;");
+        stmt.setString(1,id);
+        ResultSet rs = stmt.executeQuery();
+
         int num = 0;
         while(rs.next()){
             num = rs.getInt("num");
         }
+
         return num != 0;
-
-
-
-
-
     }
     /**
      * Creates a new database entry for a new project.
@@ -225,7 +229,7 @@ public class Database {
      */
     public boolean addProject(String name, String desc, String deadline) throws SQLException {
 
-        statement = conn.createStatement();
+        statement = conn.prepareStatement( "INSERT INTO Projects VALUES (?, ?, ?, ?, ?, ?);");
 
         String projectId = createID(8);
         String ownerID = Main.getSession().getUserId();
@@ -237,9 +241,14 @@ public class Database {
             projectId = createID(8);
         }
 
+        statement.setString(1, projectId);
+        statement.setString(2, ownerID);
+        statement.setString(3, name);
+        statement.setString(4, desc);
+        statement.setString(5, created);
+        statement.setString(6, deadline);
 
-        String insertionQuery  = "INSERT INTO Projects VALUES('" +projectId +"', '" +ownerID+"', '" + name +"', '" + desc +"', '" + created+"', '" +deadline+"');";
-        return statement.execute(insertionQuery);
+        return statement.execute();
 
 
 
@@ -251,17 +260,15 @@ public class Database {
      */
     public boolean deleteProject(String projectId) throws SQLException {
 
-        statement = conn.createStatement();
-
-        String deletionQuery = "DELETE FROM `Projects` WHERE `project_id` =  '"+ projectId + "';" ;
-        return statement.execute(deletionQuery);
+        statement = conn.prepareStatement("DELETE FROM `Projects` WHERE `project_id` = ?;");
+        statement.setString(1, projectId);
+        return statement.execute();
 
     }
 
     private boolean taskIdIsTaken(String id) throws SQLException {
-        statement = conn.createStatement();
-        String sql = "SELECT COUNT(task_id) AS num FROM Tasks WHERE task_id = '" +id +"'";
-        ResultSet rs = statement.executeQuery(sql);
+        PreparedStatement stmt = conn.prepareStatement("SELECT COUNT(task_id) AS num FROM Tasks WHERE task_id = '" +id +"'");
+        ResultSet rs = stmt.executeQuery();
         int num = 0;
         while(rs.next()){
             num = rs.getInt("num");
@@ -274,26 +281,32 @@ public class Database {
 
     public boolean addTask(String projectId, String name, String description, String deadline) throws SQLException {
 
-        statement = conn.createStatement();
+        statement = conn.prepareStatement("INSERT INTO Tasks VALUES(?,?,?,?,?,?);");
 
         Date today = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
         String created = sdf.format(today);
 
         String id = createID(10);
+
         while(taskIdIsTaken(id)){
             id = createID(10);
         }
-        String query = "INSERT INTO Tasks VALUES('" + id + "', '" + projectId + "', '" + name + "', '" + description + "', '" + created + "', '" + deadline+ "')";
-        return statement.execute(query);
+
+        statement.setString(1, id);
+        statement.setString(2, projectId);
+        statement.setString(3, name);
+        statement.setString(4, description);
+        statement.setString(5, created);
+        statement.setString(6, deadline);
+        return statement.execute();
     }
 
     public ArrayList<Task> getTasks(String projectId) throws SQLException {
 
         ArrayList<Task> tasks = new ArrayList<>();
 
-        statement = conn.createStatement();
-        String sql = "SELECT * FROM Tasks WHERE project_id = '" + projectId +"';";
+        statement = conn.prepareStatement("SELECT * FROM Tasks WHERE project_id = ?;");
 
         String projectID;
         String taskID;
@@ -302,7 +315,8 @@ public class Database {
         Date created;
         Date dl;
 
-        ResultSet rs = statement.executeQuery(sql);
+        statement.setString(1,projectId);
+        ResultSet rs = statement.executeQuery();
 
         while(rs.next()){
 
@@ -323,15 +337,16 @@ public class Database {
     }
     public boolean deleteTask(String id) throws SQLException {
 
-        statement = conn.createStatement();
-        String deletionQuery = "DELETE FROM Tasks WHERE task_id = '" + id +"';";
-        return statement.execute(deletionQuery);
+        statement = conn.prepareStatement("DELETE FROM Tasks WHERE task_id = ?;");
+        statement.setString(1, id);
+        return statement.execute();
     }
 
     public String getProjectDescription(String projectId) throws SQLException {
-        statement = conn.createStatement();
-        String sql = "SELECT description FROM Projects WHERE project_id ='" + projectId + "';";
-        ResultSet rs = statement.executeQuery(sql);
+        statement = conn.prepareStatement("SELECT description FROM Projects WHERE project_id = ?;");
+        statement.setString(1, projectId);
+        ResultSet rs = statement.executeQuery();
+
         if (rs.next()) {
             String description = rs.getString("description");
             return description;
