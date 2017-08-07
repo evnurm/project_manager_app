@@ -50,10 +50,20 @@
 }
 
 #listItem{
- -fx-background-color: linear-gradient(#858585, #808080);
+ -fx-background-color: linear-gradient(#959595, #808080);
 }
 
 #listItemTitle{
   -fx-text-fill: #101010;
 }
 
+#listItem:hover{
+    -fx-background-color: linear-gradient(#959595, #909090);
+    -fx-text-fill: #303030;
+}
+#projectMenu{
+    -fx-background-color:linear-gradient(#606060, #505050);
+}
+#emptySpace{
+    -fx-background-color: #606060;
+    }

@@ -247,7 +247,7 @@ public class Database {
 
 
         String insertionQuery  = "INSERT INTO Projects VALUES('" +projectId +"', '" +ownerID+"', '" + name +"', '" + desc +"', '" + created+"', '" +deadline+"');";
-        System.out.println(insertionQuery);
+
         return statement.execute(insertionQuery);
 
 

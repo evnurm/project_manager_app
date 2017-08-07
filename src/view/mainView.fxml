@@ -30,6 +30,11 @@
             </HBox>
             <TabPane prefHeight="200.0" prefWidth="1015.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
               <tabs>
+                  <Tab text="General">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                    </content>
+                  </Tab>
                 <Tab text="Tasks">
                      <content>
                         <VBox prefHeight="560.0" prefWidth="245.0" />
@@ -52,15 +57,15 @@
       </VBox>
    </center>
    <left>
-      <VBox prefHeight="638.0" prefWidth="190.0" BorderPane.alignment="CENTER">
+      <VBox fx:id="emptySpace" prefHeight="638.0" prefWidth="190.0" BorderPane.alignment="CENTER">
          <children>
             <Region prefHeight="84.0" prefWidth="166.0" />
-            <Button fx:id="newProjectButton" mnemonicParsing="false" onMouseClicked="#openNewProjectWindow" prefHeight="31.0" prefWidth="128.0" text="New project" />
-            <VBox fx:id="projectMenu" prefHeight="603.0" prefWidth="242.0" />
+            <Button fx:id="newProjectButton" mnemonicParsing="false" onMouseClicked="#openNewProjectWindow" prefHeight="31.0" prefWidth="190.0" text="New project" />
+            <VBox fx:id="projectMenu" prefHeight="603.0" prefWidth="242.0" VBox.vgrow="ALWAYS" />
          </children></VBox>
    </left>
    <bottom>
-      <AnchorPane prefHeight="23.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="23.0" prefWidth="1280.0" styleClass="containerWithGradient" BorderPane.alignment="CENTER">
          <children>
             <Label text="[status text]" />
          </children>

@@ -30,14 +30,16 @@ public class MainViewController implements Initializable {
         try {
             ArrayList<Project> projects = Main.getDatabase().getProjects(Main.getSession().getUser().getId());
             for(Project pr : projects){
-                projectMenu.getChildren().add(new ListItem(pr) {
+                ListItem listItem = new ListItem(pr) {
                     @Override
                     protected void onClick() throws IOException {
                         projectTitle.setText(pr.getTitle());
 
                     }
+                };
 
-                });
+                listItem.setId("listItem");
+                projectMenu.getChildren().add(listItem);
             }
         } catch (SQLException e) {
             e.printStackTrace();

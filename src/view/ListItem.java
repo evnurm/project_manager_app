@@ -31,6 +31,7 @@ public abstract class ListItem extends HBox implements Initializable{
     @FXML private Button viewButton;
 
     public ListItem(ListableItem item) {
+
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(
                 "listItem.fxml"));
         fxmlLoader.setRoot(this);
@@ -55,6 +56,7 @@ public abstract class ListItem extends HBox implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        this.setId("listItem");
         this.getStylesheets().add(Main.getStylesheetPath());
     }
 }
