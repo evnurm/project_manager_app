@@ -102,7 +102,7 @@ public class Database {
 
     public boolean idIsTaken(String id) throws SQLException {
 
-            statement = conn.prepareStatement("SELECT COUNT('user_'id') AS 'num' FROM Users WHERE user_id = ?");
+            statement = conn.prepareStatement("SELECT COUNT('user_id') AS 'num' FROM Users WHERE user_id = ?");
             statement.setString(1,id);
 
 
@@ -117,6 +117,7 @@ public class Database {
 
     public boolean usernameIsTaken(String username) throws SQLException {
         statement = conn.prepareStatement("SELECT COUNT('user_id') AS 'num'  FROM Users WHERE username = ?");
+        statement.setString(1, username);
         ResultSet rs = statement.executeQuery();
         int num = 0;
         while(rs.next()){
