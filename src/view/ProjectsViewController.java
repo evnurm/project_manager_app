@@ -61,7 +61,7 @@ public class ProjectsViewController implements Initializable {
         try {
             projects = db.getProjects(userid);
         } catch (SQLException e) {
-            System.out.println("SQL Exception");
+            e.printStackTrace();
         }
 
         for (ListableItem project : projects) {

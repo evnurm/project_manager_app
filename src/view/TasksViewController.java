@@ -69,7 +69,7 @@ public class TasksViewController implements Initializable{
             tasks = db.getTasks(projectId);
             this.descriptionLabel.setText(db.getProjectDescription(projectId));
         } catch (SQLException e) {
-            System.out.println("SQL Exception");
+            e.printStackTrace();
         }
 
         for (ListableItem task : tasks) {
