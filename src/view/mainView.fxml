@@ -10,52 +10,6 @@
 <?import javafx.scene.layout.*?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="766.0" prefWidth="1328.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainViewController">
-   <center>
-      <VBox prefHeight="638.0" prefWidth="936.0">
-         <children>
-            <HBox prefHeight="13.0" prefWidth="1114.0">
-               <children>
-                  <Region prefHeight="38.0" prefWidth="166.0" />
-                  <VBox prefHeight="56.0" prefWidth="256.0">
-                     <children>
-                        <Label fx:id="projectTitle" prefHeight="30.0" prefWidth="183.0" text="No project selected">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </Label>
-                        <TextFlow prefHeight="200.0" prefWidth="200.0" />
-                     </children>
-                  </VBox>
-               </children>
-            </HBox>
-            <TabPane prefHeight="200.0" prefWidth="1015.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
-              <tabs>
-                  <Tab text="General">
-                    <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                    </content>
-                  </Tab>
-                <Tab text="Tasks">
-                     <content>
-                        <VBox prefHeight="560.0" prefWidth="245.0" />
-                     </content>
-                </Tab>
-                <Tab text="Members">
-                  <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                  </content>
-                </Tab>
-                  <Tab text="Settings">
-                    <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                    </content>
-                  </Tab>
-              </tabs>
-            </TabPane>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="338.0" prefWidth="1116.0" />
-         </children>
-      </VBox>
-   </center>
    <left>
       <VBox fx:id="emptySpace" prefHeight="638.0" prefWidth="190.0" BorderPane.alignment="CENTER">
          <children>
@@ -76,7 +30,7 @@
          <children>
             <Region prefHeight="43.0" prefWidth="1012.0" HBox.hgrow="ALWAYS" />
             <ImageView fitHeight="59.0" fitWidth="86.0" pickOnBounds="true" preserveRatio="true" />
-            <Label fx:id="usernameLabel" prefHeight="21.0" prefWidth="129.0" text="[username]">
+            <Label fx:id="usernameLabel" prefHeight="21.0" prefWidth="165.0" text="[username]">
                <HBox.margin>
                   <Insets top="20.0" />
                </HBox.margin></Label>
@@ -87,4 +41,7 @@
          </children>
       </HBox>
    </top>
+   <center>
+      <StackPane fx:id="projectInfoContainer" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </center>
 </BorderPane>

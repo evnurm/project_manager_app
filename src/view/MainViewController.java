@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.Project;
@@ -23,17 +24,20 @@ public class MainViewController implements Initializable {
 
     @FXML private Label usernameLabel;
     @FXML private VBox projectMenu;
-    @FXML private Label projectTitle;
+    @FXML private StackPane projectInfoContainer;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         usernameLabel.setText(Main.getSession().getUser().getFirstName() + " " + Main.getSession().getUser().getLastName());
+        projectInfoContainer.getChildren().add(new ProjectInfoView());
         try {
             ArrayList<Project> projects = Main.getDatabase().getProjects(Main.getSession().getUser().getId());
             for(Project pr : projects){
                 ListItem listItem = new ListItem(pr) {
                     @Override
                     protected void onClick() throws IOException {
-                        projectTitle.setText(pr.getTitle());
+                        projectInfoContainer.getChildren().clear();
+                        projectInfoContainer.getChildren().add(new ProjectInfoView(pr));
 
                     }
                 };
@@ -44,6 +48,8 @@ public class MainViewController implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+
 
 
     }

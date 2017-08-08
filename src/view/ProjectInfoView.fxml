@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="685.0" prefWidth="1016.0" stylesheets="@darkstyle.css" type="VBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label fx:id="projectTitle" text="Project name here">
+         <VBox.margin>
+            <Insets bottom="10.0" left="50.0" top="10.0" />
+         </VBox.margin>
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <TabPane prefHeight="568.0" prefWidth="913.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab fx:id="generalTab" text="General">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="204.0" prefWidth="913.0" />
+            </content>
+          </Tab>
+          <Tab fx:id="tasksTab" text="Tasks">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+          </Tab>
+            <Tab fx:id="membersTab" text="Members">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="464.0" prefWidth="913.0" />
+              </content>
+            </Tab>
+            <Tab fx:id="settingsTab" text="Settings">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</fx:root>
