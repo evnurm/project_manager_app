@@ -211,6 +211,21 @@ public class Database {
 
         }
 
+        /*
+         * Finding the tasks of the project and adding them to project instance at hand.
+         */
+        ArrayList<Task> tasks;
+        for(Project pr: projects){
+            tasks = getTasks(pr.getId());
+
+
+            for(Task task: tasks){
+
+                pr.addTask(task);
+            }
+
+        }
+
         return projects;
 
 
