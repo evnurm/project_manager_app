@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="685.0" prefWidth="1016.0" stylesheets="@darkstyle.css" type="VBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root stylesheets="@darkstyle.css" type="VBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label fx:id="projectTitle" text="Project name here">
          <VBox.margin>
@@ -22,14 +22,35 @@
         <tabs>
           <Tab fx:id="generalTab" text="General">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="204.0" prefWidth="913.0" />
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="204.0" prefWidth="913.0" style="-fx-background-color: white;">
+                     <children>
+                        <Label fx:id="projectLabel" layoutX="46.0" layoutY="28.0" text="Title" textFill="#1b1a1a">
+                           <font>
+                              <Font size="21.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="46.0" layoutY="59.0" prefHeight="38.0" prefWidth="166.0" text="Description">
+                           <font>
+                              <Font size="21.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="descriptionLabel" alignment="TOP_LEFT" layoutX="112.0" layoutY="107.0" prefHeight="80.0" prefWidth="719.0" text="Description here" wrapText="true" />
+                        <Label layoutX="50.0" layoutY="212.0" text="Created">
+                           <font>
+                              <Font size="21.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="createdLabel" layoutX="112.0" layoutY="243.0" text="Created date" />
+                        <Label layoutX="49.0" layoutY="321.0" text="Deadline">
+                           <font>
+                              <Font size="21.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="deadlineLabel" layoutX="114.0" layoutY="359.0" text="Deadline " />
+                     </children></AnchorPane>
             </content>
           </Tab>
-          <Tab fx:id="tasksTab" text="Tasks">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-            </content>
-          </Tab>
+          <Tab fx:id="tasksTab" text="Tasks" />
             <Tab fx:id="membersTab" text="Members">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="464.0" prefWidth="913.0" />
