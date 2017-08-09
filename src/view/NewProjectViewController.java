@@ -50,7 +50,7 @@ public class NewProjectViewController implements Initializable{
            e.printStackTrace();
 
         }finally{
-
+            ((Stage) layout.getScene().getWindow()).close();
 
         }
 
