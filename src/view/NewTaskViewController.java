@@ -49,16 +49,8 @@ public class NewTaskViewController implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }finally{
-            try {
-                Parent root = FXMLLoader.load(getClass().getResource("tasksView.fxml"));
-                Scene scene = new Scene(root);
-                scene.getStylesheets().add(Main.getStylesheetPath());
-                oldStage.setScene(scene);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            Stage stage  = (Stage) addTaskButton.getScene().getWindow();
-            stage.close();
+            ((Stage) nameField.getScene().getWindow()).close();
+         // TODO: Update the view
         }
 
 

@@ -24,7 +24,7 @@ public class Task implements ListableItem{
 
     @Override
     public String getDescription() {
-        return "";
+        return description;
     }
 
     public Task(String taskId, String projectId, String name, String desc, Date created,  Date dl){

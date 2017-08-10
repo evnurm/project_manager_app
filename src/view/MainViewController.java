@@ -42,6 +42,7 @@ public class MainViewController implements Initializable {
                 ListItem listItem = new ListItem(pr) {
                     @Override
                     protected void onClick() throws IOException {
+                        Main.getSession().setProjectId(pr.getId());
                         projectInfoContainer.getChildren().clear();
                         projectInfoContainer.getChildren().add(new ProjectInfoView(pr));
 

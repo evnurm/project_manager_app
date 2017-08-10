@@ -50,7 +50,45 @@
                      </children></AnchorPane>
             </content>
           </Tab>
-          <Tab fx:id="tasksTab" text="Tasks" />
+          <Tab fx:id="tasksTab" text="Tasks">
+               <content>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <VBox fx:id="taskMenu" prefHeight="529.0" prefWidth="280.0">
+                           <children>
+                              <Button mnemonicParsing="false" onMouseClicked="#openNewTaskWindow" prefHeight="31.0" prefWidth="207.0" text=" + New task" />
+                           </children>
+                        </VBox>
+                        <AnchorPane fx:id="taskInfoContainer" prefHeight="529.0" prefWidth="800.0">
+                           <children>
+                              <Label fx:id="taskName" layoutX="52.0" layoutY="41.0" text="Task name">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="52.0" layoutY="72.0" text="Description">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="taskDescription" alignment="TOP_LEFT" layoutX="120.0" layoutY="103.0" prefHeight="60.0" prefWidth="391.0" text="Description here" wrapText="true" />
+                              <Label layoutX="52.0" layoutY="169.0" text="Created">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="taskCreated" layoutX="120.0" layoutY="209.0" text="Created date here" />
+                              <Label layoutX="52.0" layoutY="265.0" text="Deadline">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="taskDeadline" layoutX="125.0" layoutY="310.0" text="Deadline here" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </HBox>
+               </content></Tab>
             <Tab fx:id="membersTab" text="Members">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="464.0" prefWidth="913.0" />
