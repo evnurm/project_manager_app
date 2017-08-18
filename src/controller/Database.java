@@ -147,7 +147,7 @@ public class Database {
             statement = conn.prepareStatement("INSERT INTO Users VALUES(?,?,?,?,?,?)");
             statement.setString(1,userId);
             statement.setString(2,username);
-            statement.setString(3,password);
+            statement.setString(3,hashString);
             statement.setString(4,fname);
             statement.setString(5, lname);
             statement.setString(6, email);
