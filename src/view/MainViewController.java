@@ -30,36 +30,88 @@ public class MainViewController implements Initializable {
     @FXML private VBox projectMenu;
     @FXML private StackPane projectInfoContainer;
     @FXML private ImageView profilePic;
+
+    private ArrayList<Project> projects;
+    private Project currentProject;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
         usernameLabel.setText(Main.getSession().getUser().getFirstName() + " " + Main.getSession().getUser().getLastName());
         profilePic.setImage(new Image((new File("res/default.jpg")).toURI().toString()));
         projectInfoContainer.getChildren().add(new ProjectInfoView());
         try {
-            ArrayList<Project> projects = Main.getDatabase().getProjects(Main.getSession().getUser().getId());
-            for(Project pr : projects){
-                ListItem listItem = new ListItem(pr) {
-                    @Override
-                    protected void onClick() throws IOException {
-                        Main.getSession().setProjectId(pr.getId());
-                        projectInfoContainer.getChildren().clear();
-                        projectInfoContainer.getChildren().add(new ProjectInfoView(pr));
-
-                    }
-                };
-
-                listItem.setId("listItem");
-                projectMenu.getChildren().add(listItem);
-            }
+            loadProjectsToView();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-
-
-
     }
+
+    /**
+     * loadProjectsToView retrieves the projects from the database and creates
+     * the project list in the UI according to that data
+     * @throws SQLException
+     */
+    private void loadProjectsToView() throws SQLException {
+        System.out.println("woohoo loading projects! :)");
+        projectMenu.getChildren().clear();
+        this.projects = Main.getDatabase().getProjects(Main.getSession().getUser().getId());
+        for(Project pr : projects){
+            ListItem listItem = new ListItem(pr) {
+                @Override
+                protected void onClick() throws IOException {
+                    Main.getSession().setProjectId(pr.getId());
+                    projectInfoContainer.getChildren().clear();
+                    projectInfoContainer.getChildren().add(new ProjectInfoView(pr));
+                    currentProject = pr;
+                }
+            };
+            listItem.setId("listItem");
+            projectMenu.getChildren().add(listItem);
+        }
+    }
+
+    /**
+     * Tries to update the currently chosen project after new project data has been retrieved,
+     * and tries to update the view of the chosen project to display the updated data.
+     */
+    private void updateCurrentProject() {
+        //TODO: tää voisi päivittää projektin näkymän sen sijaan että lataisi uuden (valittu tabi pysyisi ehkä)
+        if (this.currentProject != null) {
+            Project oldProject = this.currentProject;
+            Project updatedOldProject = null;
+            for (Project pr : this.projects) {
+                if (pr.getId().equals(oldProject.getId())) {
+                    updatedOldProject = pr;
+                }
+            }
+            if (updatedOldProject != null) {
+                this.currentProject = updatedOldProject;
+                this.projectInfoContainer.getChildren().clear();
+                this.projectInfoContainer.getChildren().add(new ProjectInfoView(this.currentProject));
+            }
+            else {
+                System.out.println("couldn't find the previously chosen project");
+            }
+        }
+        else {
+            System.out.println("no project chosen: no current project to reload");
+        }
+    }
+
+    /**
+     * refreshProjects refreshes project data and updates to UI to display the new data. This can be
+     * called e.g. after the user makes a change in the program.
+     */
+    public void refreshProjects() {
+        try{
+            loadProjectsToView();
+        } catch (SQLException e) {
+            System.out.println(e.getErrorCode());
+            System.out.println(e.getMessage());
+        }
+        updateCurrentProject();
+    }
+
     public void logout(){
         try {
             Main.getSession().setUser(new User("", "", "", ""));

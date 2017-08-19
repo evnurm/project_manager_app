@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.image.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="766.0" prefWidth="1328.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainViewController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="766.0" prefWidth="1328.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainViewController">
    <left>
       <VBox fx:id="emptySpace" prefHeight="638.0" prefWidth="190.0" BorderPane.alignment="CENTER">
          <children>
             <Region prefHeight="84.0" prefWidth="166.0" />
+            <Button mnemonicParsing="false" text="Refresh" onMouseClicked="#refreshProjects" />
             <Button fx:id="newProjectButton" mnemonicParsing="false" onMouseClicked="#openNewProjectWindow" prefHeight="31.0" prefWidth="190.0" text="New project" />
             <VBox fx:id="projectMenu" prefHeight="603.0" prefWidth="242.0" VBox.vgrow="ALWAYS" />
          </children></VBox>
