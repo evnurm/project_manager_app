@@ -52,7 +52,6 @@ public class MainViewController implements Initializable {
      * @throws SQLException
      */
     private void loadProjectsToView() throws SQLException {
-        System.out.println("woohoo loading projects! :)");
         projectMenu.getChildren().clear();
         this.projects = Main.getDatabase().getProjects(Main.getSession().getUser().getId());
         for(Project pr : projects){
@@ -71,11 +70,9 @@ public class MainViewController implements Initializable {
     }
 
     /**
-     * Tries to update the currently chosen project after new project data has been retrieved,
-     * and tries to update the view of the chosen project to display the updated data.
+     * Tries to update the currently chosen project and its view
      */
     private void updateCurrentProject() {
-        //TODO: tää voisi päivittää projektin näkymän sen sijaan että lataisi uuden (valittu tabi pysyisi ehkä)
         if (this.currentProject != null) {
             Project oldProject = this.currentProject;
             Project updatedOldProject = null;
@@ -87,6 +84,7 @@ public class MainViewController implements Initializable {
             if (updatedOldProject != null) {
                 this.currentProject = updatedOldProject;
                 this.projectInfoContainer.getChildren().clear();
+                //TODO: instead of creating a new ProjectInfoView, try to update the old one so that the same tab would remain open
                 this.projectInfoContainer.getChildren().add(new ProjectInfoView(this.currentProject));
             }
             else {
