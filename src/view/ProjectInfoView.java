@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import model.Member;
 import model.Project;
 import model.Task;
 
@@ -30,6 +31,7 @@ public class ProjectInfoView extends VBox implements Initializable {
     @FXML private Label taskCreated;
     @FXML private Label taskDeadline;
     @FXML private AnchorPane taskInfoContainer;
+    @FXML private VBox membersContainer;
 
     public ProjectInfoView(Project project){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ProjectInfoView.fxml"));
@@ -69,6 +71,10 @@ public class ProjectInfoView extends VBox implements Initializable {
 
                 }
             });
+        }
+        ArrayList<Member> members = project.getMembers();
+        for(Member m : members){
+            membersContainer.getChildren().add(new MemberListItem(m));
         }
     }
 

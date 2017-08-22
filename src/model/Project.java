@@ -75,4 +75,7 @@ public class Project implements ListableItem{
         return SQLformat.format(deadline);
     }
 
+    public ArrayList<Member> getMembers() {
+        return members;
+    }
 }
