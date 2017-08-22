@@ -1,5 +1,6 @@
 package controller;
 
+import model.Member;
 import model.Project;
 import model.Task;
 import model.User;
@@ -173,6 +174,10 @@ public class Database {
         Date created;
         Date deadline;
 
+        /*
+         * Fetching the projects the current user has created themselves
+         */
+
         statement = conn.prepareStatement("SELECT * FROM Projects WHERE owner_id = ? ;");
         statement.setString(1,id);
         ResultSet rs  = statement.executeQuery();
@@ -186,9 +191,9 @@ public class Database {
             deadline = rs.getDate("deadline");
 
 
+            Project project = new Project(projectId, ownerId, name, desc, created, deadline);
 
-
-           projects.add(new Project(projectId, ownerId, name, desc, created, deadline));
+           projects.add(project);
 
 
         }
@@ -205,23 +210,30 @@ public class Database {
             deadline = rs.getDate("deadline");
 
 
+            Project project = new Project(projectId, ownerId, name, desc, created, deadline);
 
 
-            projects.add(new Project(projectId, ownerId, name, desc, created, deadline));
+
+            projects.add(project);
 
         }
 
         /*
-         * Finding the tasks of the project and adding them to project instance at hand.
+         * Finding the tasks and members of the project and adding them to project instance at hand.
          */
         ArrayList<Task> tasks;
+        ArrayList<Member> members;
         for(Project pr: projects){
             tasks = getTasks(pr.getId());
+            members = getMembers(pr.getId());
 
 
             for(Task task: tasks){
 
                 pr.addTask(task);
+            }
+            for(Member m : members){
+                pr.addMember(m);
             }
 
         }
@@ -355,6 +367,13 @@ public class Database {
 
 
     }
+
+    /**
+     * Deletes the project from the database
+     * @param id
+     * @return
+     * @throws SQLException
+     */
     public boolean deleteTask(String id) throws SQLException {
 
         statement = conn.prepareStatement("DELETE FROM Tasks WHERE task_id = ?;");
@@ -362,6 +381,12 @@ public class Database {
         return statement.execute();
     }
 
+    /**
+     * Gets the description of the given project
+     * @param projectId the id of the project
+     * @return The description of the project or "Description not found" if descriptino not available
+     * @throws SQLException
+     */
     public String getProjectDescription(String projectId) throws SQLException {
         statement = conn.prepareStatement("SELECT description FROM Projects WHERE project_id = ?;");
         statement.setString(1, projectId);
@@ -374,6 +399,34 @@ public class Database {
         else {
             return "Description not found";
         }
+    }
+
+    /**
+     * Finds the members of the given project
+     * @param projectId the id of the project whose members are wanted to get
+     * @return an ArrayList containing the members of the project
+     */
+    public ArrayList<Member> getMembers(String projectId){
+
+        ArrayList<Member> members = new  ArrayList<>();
+
+        try {
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM Users WHERE user_id IN( SELECT user_id FROM Member WHERE project_id = ?)");
+            ps.setString(1, projectId);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                String id = rs.getString("user_id");
+                String fname = rs.getString("first_name");
+                String lname = rs.getString("last_name");
+                String email = rs.getString("email");
+                User user = new User(id, fname, lname, email);
+                members.add(new Member(user));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return members;
     }
 
 }
