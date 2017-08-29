@@ -37,7 +37,9 @@ public class ProjectInfoView extends VBox implements Initializable {
     @FXML private VBox membersContainer;
     @FXML private TabPane tabPane;
 
-    public ProjectInfoView(Project project){
+    private MainViewController mainViewController;
+
+    public ProjectInfoView(Project project, MainViewController mainViewController){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ProjectInfoView.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -47,6 +49,8 @@ public class ProjectInfoView extends VBox implements Initializable {
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
+        this.mainViewController = mainViewController;
+
         projectTitle.setText(project.getTitle());
         projectLabel.setText(project.getTitle());
         descriptionLabel.setText(project.getDescription());
@@ -61,9 +65,8 @@ public class ProjectInfoView extends VBox implements Initializable {
             infoLabel.setAlignment(Pos.CENTER);
             taskInfoContainer.getChildren().clear();
             taskInfoContainer.getChildren().add(infoLabel);
-
-
         }
+
         for(Task task: tasks){
             taskMenu.getChildren().add(new ListItem(task) {
                 @Override
@@ -100,7 +103,8 @@ public class ProjectInfoView extends VBox implements Initializable {
         try {
             Scene scene = new Scene(FXMLLoader.load(getClass().getResource("NewTaskView.fxml")));
             stage.setScene(scene);
-            stage.show();
+            stage.showAndWait();
+            this.mainViewController.refreshProjects();
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -61,7 +61,7 @@ public class MainViewController implements Initializable {
                 protected void onClick() throws IOException {
                     Main.getSession().setProjectId(pr.getId());
                     projectInfoContainer.getChildren().clear();
-                    ProjectInfoView projectInfoView = new ProjectInfoView(pr);
+                    ProjectInfoView projectInfoView = new ProjectInfoView(pr, MainViewController.this);
                     projectInfoContainer.getChildren().add(projectInfoView);
                     currentProject = pr;
                     currentProjectInfoView = projectInfoView;
@@ -89,7 +89,7 @@ public class MainViewController implements Initializable {
                 this.projectInfoContainer.getChildren().clear();
 
                 ProjectInfoView oldProjectInfoView = this.currentProjectInfoView;
-                ProjectInfoView newProjectInfoView = new ProjectInfoView(this.currentProject);
+                ProjectInfoView newProjectInfoView = new ProjectInfoView(this.currentProject, this);
 
                 this.projectInfoContainer.getChildren().add(newProjectInfoView);
                 newProjectInfoView.selectTab(oldProjectInfoView.getSelectedTabIndex());
@@ -135,7 +135,8 @@ public class MainViewController implements Initializable {
             Scene scene  = new Scene(FXMLLoader.load(getClass().getResource("NewProjectView.fxml")));
             Stage stage = new Stage();
             stage.setScene(scene);
-            stage.show();
+            stage.showAndWait();
+            this.refreshProjects();
 
         } catch (IOException e) {
             e.printStackTrace();
