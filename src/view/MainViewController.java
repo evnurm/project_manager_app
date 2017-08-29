@@ -33,6 +33,7 @@ public class MainViewController implements Initializable {
 
     private ArrayList<Project> projects;
     private Project currentProject;
+    private ProjectInfoView currentProjectInfoView;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -60,8 +61,10 @@ public class MainViewController implements Initializable {
                 protected void onClick() throws IOException {
                     Main.getSession().setProjectId(pr.getId());
                     projectInfoContainer.getChildren().clear();
-                    projectInfoContainer.getChildren().add(new ProjectInfoView(pr));
+                    ProjectInfoView projectInfoView = new ProjectInfoView(pr);
+                    projectInfoContainer.getChildren().add(projectInfoView);
                     currentProject = pr;
+                    currentProjectInfoView = projectInfoView;
                 }
             };
             listItem.setId("listItem");
@@ -73,7 +76,7 @@ public class MainViewController implements Initializable {
      * Tries to update the currently chosen project and its view
      */
     private void updateCurrentProject() {
-        if (this.currentProject != null) {
+        if ((this.currentProject != null) && (this.currentProjectInfoView != null)) {
             Project oldProject = this.currentProject;
             Project updatedOldProject = null;
             for (Project pr : this.projects) {
@@ -81,11 +84,16 @@ public class MainViewController implements Initializable {
                     updatedOldProject = pr;
                 }
             }
-            if (updatedOldProject != null) {
+            if (updatedOldProject != null) { //found matching updated project
                 this.currentProject = updatedOldProject;
                 this.projectInfoContainer.getChildren().clear();
-                //TODO: instead of creating a new ProjectInfoView, try to update the old one so that the same tab would remain open
-                this.projectInfoContainer.getChildren().add(new ProjectInfoView(this.currentProject));
+
+                ProjectInfoView oldProjectInfoView = this.currentProjectInfoView;
+                ProjectInfoView newProjectInfoView = new ProjectInfoView(this.currentProject);
+
+                this.projectInfoContainer.getChildren().add(newProjectInfoView);
+                newProjectInfoView.selectTab(oldProjectInfoView.getSelectedTabIndex());
+                this.currentProjectInfoView = newProjectInfoView;
             }
             else {
                 System.out.println("couldn't find the previously chosen project");

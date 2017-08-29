@@ -6,6 +6,9 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.SelectionModel;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -32,6 +35,7 @@ public class ProjectInfoView extends VBox implements Initializable {
     @FXML private Label taskDeadline;
     @FXML private AnchorPane taskInfoContainer;
     @FXML private VBox membersContainer;
+    @FXML private TabPane tabPane;
 
     public ProjectInfoView(Project project){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ProjectInfoView.fxml"));
@@ -100,5 +104,15 @@ public class ProjectInfoView extends VBox implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void selectTab(int tabIndex) {
+        SelectionModel<Tab> selectionModel = this.tabPane.getSelectionModel();
+        selectionModel.clearAndSelect(tabIndex);
+    }
+
+    public int getSelectedTabIndex() {
+        SelectionModel<Tab> selectionModel = this.tabPane.getSelectionModel();
+        return selectionModel.getSelectedIndex();
     }
 }
