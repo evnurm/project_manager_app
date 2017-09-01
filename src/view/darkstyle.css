@@ -67,3 +67,7 @@
 #emptySpace{
     -fx-background-color: #606060;
     }
+
+#generalContainer > Label{
+    -fx-text-fill: #111111;
+}
