@@ -110,6 +110,18 @@ public class ProjectInfoView extends VBox implements Initializable {
         }
     }
 
+    public void openNewMemberSearchWindow(){
+        Stage stage = new Stage();
+        try {
+            Scene scene = new Scene(FXMLLoader.load(getClass().getResource("MemberSearch.fxml")));
+            stage.setScene(scene);
+            stage.showAndWait();
+            this.mainViewController.refreshProjects();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void selectTab(int tabIndex) {
         SelectionModel<Tab> selectionModel = this.tabPane.getSelectionModel();
         selectionModel.clearAndSelect(tabIndex);
