@@ -82,7 +82,7 @@ public class Database {
             String hashString = DatatypeConverter.printHexBinary(passwordHash).toLowerCase();
 
 
-            statement = conn.prepareStatement("SELECT * FROM Users WHERE username = ? AND password  = ?;");
+            statement = conn.prepareStatement("SELECT * FROM Users WHERE username COLLATE utf8_bin = ? AND password  = ?;");
             statement.setString(1, username);
             statement.setString(2, hashString);
 
