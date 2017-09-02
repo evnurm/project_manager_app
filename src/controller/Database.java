@@ -429,6 +429,33 @@ public class Database {
         return members;
     }
 
+    /**
+     * Finds the users whose names resemble the search query and returns them in an ArrayList
+     * and an empty ArrayList if no users match the query
+     * @param searchQuery
+     * @return
+     * @throws SQLException
+     */
+    public ArrayList<User> searchUsers(String searchQuery) throws SQLException {
+        ArrayList<User> matchedUsers = new ArrayList<>();
+        statement = conn. prepareStatement("SELECT * FROM Users WHERE first_name LIKE ? OR last_name LIKE ?");
+        statement.setString(1, searchQuery + "%");
+        statement.setString(2, searchQuery + "%");
+
+
+        ResultSet rs = statement.executeQuery();
+        while(rs.next()){
+            String id = rs.getString("user_id");
+            String fname = rs.getString("first_name");
+            String lname = rs.getString("last_name");
+            String email = rs.getString("email");
+
+            matchedUsers.add(new User(id, fname, lname, email));
+
+        }
+        return matchedUsers;
+    }
+
 }
 
 

@@ -6,13 +6,15 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="containerWithGradient" stylesheets="@darkstyle.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MemberSearch">
    <children>
       <Label layoutX="228.0" layoutY="25.0" text="Search for users" />
       <TextField fx:id="searchBar" layoutX="147.0" layoutY="59.0" promptText="Username" />
-      <VBox fx:id="memberResults" layoutX="23.0" layoutY="106.0" prefHeight="234.0" prefWidth="555.0" />
+      <VBox fx:id="memberResults" alignment="CENTER" layoutX="23.0" layoutY="106.0" prefHeight="234.0" prefWidth="555.0">
+         <children>
+            <Label prefHeight="35.0" prefWidth="185.0" text="No search term given" />
+         </children></VBox>
       <Button fx:id="addMemberButton" layoutX="204.0" layoutY="355.0" mnemonicParsing="false" text="Add user as member" />
-      <Button fx:id="searchButton" layoutX="356.0" layoutY="59.0" mnemonicParsing="false" text="Search" />
+      <Button fx:id="searchButton" layoutX="356.0" layoutY="59.0" mnemonicParsing="false" onMouseClicked="#updateResults" text="Search" />
    </children>
 </AnchorPane>
