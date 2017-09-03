@@ -2,6 +2,7 @@ package view;
 
 import controller.Database;
 import controller.Session;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -11,6 +12,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.User;
@@ -39,6 +42,17 @@ public class LoginViewController implements Initializable {
 
         layout.getStyleClass().add("containerWithGradient");
         signUpLabel.getStyleClass().add("highlightLabel");
+
+        layout.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if(event.getCode() == KeyCode.ENTER){
+                    signIn();
+                }
+            }
+        });
+
+
     }
     public void signIn(){
         Session session = Main.getSession();
