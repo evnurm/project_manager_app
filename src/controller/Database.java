@@ -436,12 +436,13 @@ public class Database {
      * @return
      * @throws SQLException
      */
-    public ArrayList<User> searchUsers(String searchQuery) throws SQLException {
+    public ArrayList<User> searchUsers(String searchQuery, String projectId) throws SQLException {
         ArrayList<User> matchedUsers = new ArrayList<>();
-        statement = conn. prepareStatement("SELECT * FROM Users WHERE first_name LIKE ? OR last_name LIKE ?");
+        statement = conn. prepareStatement("SELECT * FROM Users WHERE first_name LIKE ? OR last_name LIKE ? AND user_id NOT IN(" +
+                "SELECT user_id FROM Member WHERE project_id = ?)");
         statement.setString(1, searchQuery + "%");
         statement.setString(2, searchQuery + "%");
-
+        statement.setString(3, projectId);
 
         ResultSet rs = statement.executeQuery();
         while(rs.next()){
@@ -454,6 +455,15 @@ public class Database {
 
         }
         return matchedUsers;
+    }
+
+    public void addMember(String projectId, String userId) throws SQLException {
+        statement = conn.prepareStatement("INSERT INTO Member VALUES (?, ?)");
+        statement.setString(1, projectId);
+        statement.setString(2, userId);
+        statement.execute();
+
+
     }
 
 }

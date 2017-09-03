@@ -38,8 +38,10 @@ public class ProjectInfoView extends VBox implements Initializable {
     @FXML private TabPane tabPane;
 
     private MainViewController mainViewController;
+    private Project project;
 
     public ProjectInfoView(Project project, MainViewController mainViewController){
+        this.project = project;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ProjectInfoView.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -81,7 +83,10 @@ public class ProjectInfoView extends VBox implements Initializable {
         }
         ArrayList<Member> members = project.getMembers();
         for(Member m : members){
-            membersContainer.getChildren().add(new MemberListItem(m));
+            membersContainer.getChildren().add(new MemberListItem(m){
+                @Override
+                public void onClick(){}
+            });
         }
     }
 
@@ -113,7 +118,10 @@ public class ProjectInfoView extends VBox implements Initializable {
     public void openNewMemberSearchWindow(){
         Stage stage = new Stage();
         try {
-            Scene scene = new Scene(FXMLLoader.load(getClass().getResource("MemberSearch.fxml")));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("MemberSearch.fxml"));
+            MemberSearch ms = new MemberSearch(project);
+            loader.setController(ms);
+            Scene scene = new Scene(loader.load());
             stage.setScene(scene);
             stage.showAndWait();
             this.mainViewController.refreshProjects();

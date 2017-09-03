@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import model.Member;
+import model.User;
 
 
 import java.io.File;
@@ -15,7 +16,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class MemberListItem extends HBox implements Initializable {
+public abstract class MemberListItem extends HBox implements Initializable {
 
     @FXML
     private Label nameLabel;
@@ -43,4 +44,9 @@ public class MemberListItem extends HBox implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
     }
+
+    /**
+     * An event handler for click events
+     */
+    public abstract void onClick();
 }
