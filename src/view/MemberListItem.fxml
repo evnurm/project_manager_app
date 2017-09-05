@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#onClick" prefHeight="86.0" prefWidth="707.0" styleClass="memberListItem" stylesheets="@darkstyle.css" type="HBox" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" onMouseClicked="#onClick" prefHeight="86.0" prefWidth="707.0" styleClass="memberListItem" stylesheets="@darkstyle.css" type="HBox" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView fx:id="memberProfilePic" fitHeight="71.0" fitWidth="76.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS">
          <image>

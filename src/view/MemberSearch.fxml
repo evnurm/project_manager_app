@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
@@ -7,10 +8,15 @@
    <children>
       <Label layoutX="228.0" layoutY="25.0" text="Search for users" />
       <TextField fx:id="searchBar" layoutX="147.0" layoutY="59.0" promptText="Username" />
-      <VBox fx:id="memberResults" alignment="CENTER" layoutX="23.0" layoutY="106.0" prefHeight="234.0" prefWidth="555.0">
-         <children>
-            <Label prefHeight="35.0" prefWidth="185.0" text="No search term given" />
-         </children></VBox>
+      <ScrollPane hbarPolicy="NEVER" layoutX="23.0" layoutY="106.0" prefViewportHeight="234.0" prefViewportWidth="555.0" vbarPolicy="ALWAYS">
+         <content>
+            <VBox fx:id="memberResults" alignment="CENTER" layoutX="23.0" layoutY="106.0" prefHeight="234.0" prefWidth="555.0">
+               <children>
+                  <Label prefHeight="35.0" prefWidth="185.0" text="No search term given" />
+               </children>
+            </VBox>
+         </content>
+      </ScrollPane>
       <Button fx:id="addMemberButton" layoutX="204.0" layoutY="355.0" mnemonicParsing="false" onMouseClicked="#addNewMember" text="Add user as member" />
       <Button fx:id="searchButton" layoutX="356.0" layoutY="59.0" mnemonicParsing="false" onMouseClicked="#updateResults" text="Search" />
    </children>
