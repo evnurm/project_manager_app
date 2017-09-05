@@ -32,6 +32,8 @@ public class MemberSearch implements Initializable{
     }
 
     public void updateResults(){
+        this.addMemberButton.setDisable(true);  //these prevent the case where the user could be accidentally
+        this.selectedUser = null;               //using a selection from an old search
         if(!searchBar.getText().equals("")) {
             try {
                 memberResults.setAlignment(Pos.TOP_CENTER);
@@ -45,6 +47,7 @@ public class MemberSearch implements Initializable{
                             public  void onClick(){
                                 selectedUser  = user;
                                 this.requestFocus();
+                                MemberSearch.this.addMemberButton.setDisable(false);
                             }
                         });
                     }
@@ -56,7 +59,6 @@ public class MemberSearch implements Initializable{
                 e.printStackTrace();
             }
         }else{
-
             memberResults.getChildren().clear();
             memberResults.setAlignment(Pos.CENTER);
             memberResults.getChildren().add(new Label("No search term given."));
@@ -65,11 +67,9 @@ public class MemberSearch implements Initializable{
 
     public void addNewMember(){
         try {
-
-
+            if (this.selectedUser != null) {
                 Main.getDatabase().addMember(project.getId(), selectedUser.getId());
-
-
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -77,8 +77,6 @@ public class MemberSearch implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-
-
+        this.addMemberButton.setDisable(true);
     }
 }
