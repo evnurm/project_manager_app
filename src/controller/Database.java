@@ -457,13 +457,23 @@ public class Database {
         return matchedUsers;
     }
 
-    public void addMember(String projectId, String userId) throws SQLException {
-        statement = conn.prepareStatement("INSERT INTO Member VALUES (?, ?)");
+    private boolean isMember(final String projectId, final String userId) throws SQLException {
+        statement = conn.prepareStatement("SELECT COUNT(*) FROM member WHERE project_id=? AND user_id=?");
         statement.setString(1, projectId);
         statement.setString(2, userId);
-        statement.execute();
+        ResultSet rs = statement.executeQuery();
+        rs.next();
+        int count = rs.getInt(1);
+        return count > 0;
+    }
 
-
+    public void addMember(final String projectId, final String userId) throws SQLException {
+        if (!this.isMember(projectId, userId)) {
+            statement = conn.prepareStatement("INSERT INTO Member VALUES (?, ?)");
+            statement.setString(1, projectId);
+            statement.setString(2, userId);
+            statement.execute();
+        }
     }
 
 }
