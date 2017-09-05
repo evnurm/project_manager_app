@@ -1,7 +1,6 @@
 package view;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.layout.VBox;
@@ -11,7 +10,6 @@ import model.Member;
 import model.Project;
 import model.User;
 
-import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -46,8 +44,7 @@ public class MemberSearch implements Initializable{
                             @Override
                             public  void onClick(){
                                 selectedUser  = user;
-                                
-
+                                this.requestFocus();
                             }
                         });
                     }
